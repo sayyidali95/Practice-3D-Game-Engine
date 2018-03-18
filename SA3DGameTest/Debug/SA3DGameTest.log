@@ -1,6 +1,2 @@
-﻿  main.cpp
-d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\main.cpp(8): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  camera.cpp
-  Generating Code...
-  SA3DGameTest.vcxproj -> D:\Users\Sayyid\3DProjects\SA3DGameTest\Debug\SA3DGameTest.exe
+﻿  SA3DGameTest.vcxproj -> D:\Users\Sayyid\3DProjects\SA3DGameTest\Debug\SA3DGameTest.exe
   SA3DGameTest.vcxproj -> D:\Users\Sayyid\3DProjects\SA3DGameTest\Debug\SA3DGameTest.pdb (Partial PDB)
