@@ -4,10 +4,12 @@
 #include <sstream>
 #include <iostream>
 #include <vector>
+#include <map>
 #include <GL/glew.h>
 
 #include "shader.h"
 #include "graphics.h"
+#include "mesh.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
@@ -20,7 +22,7 @@
 namespace sa3d {
 	namespace graphics {
 
-		GLint TextureFromFile(const char* path, std::string directory);
+		unsigned int TextureFromFile(const char* path, std::string directory, bool gamma);
 
 		class Model
 		{

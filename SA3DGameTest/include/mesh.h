@@ -7,10 +7,13 @@
 #include <sstream>
 #include <iostream>
 #include <vector>
-#include <GL/glew.h>
+
+
 
 #include "shader.h"
 #include "graphics.h"
+#include "stb_image.h"
+
 
 #include "assimp/Importer.hpp"
 #include "assimp/scene.h"
