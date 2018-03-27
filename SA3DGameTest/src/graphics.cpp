@@ -52,16 +52,15 @@ namespace sa3d {
 			glfwSetMouseButtonCallback(m_Window, mouse_button_callback);
 			glfwSetCursorPosCallback(m_Window, cursor_position_callback);
 
-
-			if (glewInit() != GLEW_OK)
+			// glad: load all OpenGL function pointers
+			// ---------------------------------------
+			if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 			{
-				std::cout << "Could not initialize GLEW!" << std::endl;
-				return false;
+				std::cout << "Failed to initialize GLAD" << std::endl;
+				return -1;
 			}
 
-			// configure global opengl state
-			// -----------------------------
-			glEnable(GL_DEPTH_TEST);
+
 
 
 			std::cout << "OpenGL" << glGetString(GL_VERSION) << std::endl;
@@ -93,6 +92,7 @@ namespace sa3d {
 
 		void Window::clear() const
 		{
+			glClearColor(0.2f, 0.3f, 0.3f, 0.7f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		}
 
@@ -105,9 +105,9 @@ namespace sa3d {
 				std::cout << "OpenGL Error: " << error << std::endl;
 			}
 
+			glfwSwapBuffers(m_Window);
 			glfwPollEvents();
 			//			glfwGetFramebufferSize(m_Window, &m_Width, &m_Height);
-			glfwSwapBuffers(m_Window);
 
 		}
 

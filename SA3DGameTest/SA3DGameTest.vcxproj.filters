@@ -65,9 +65,6 @@
     <ClInclude Include="include\model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\stb_image.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -101,6 +98,18 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="shaders\color.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\texture.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\texture.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\coordinates.fs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\coordinates.vs">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

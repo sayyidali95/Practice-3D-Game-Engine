@@ -5,7 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
-#include <GL/glew.h>
+#include <glad/glad.h>
 
 #include "shader.h"
 #include "graphics.h"

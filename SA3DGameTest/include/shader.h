@@ -6,7 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <GL/glew.h>
+#include <glad/glad.h>
 #include "glm/glm.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
@@ -18,10 +18,10 @@ namespace sa3d {
 		class Shader
 		{
 		private:
-			GLuint m_ShaderID;
 			const char *m_VertPath;
 			const char *m_FragPath;
 		public:
+			GLuint m_ShaderID;
 			GLuint program;
 			Shader(const char* vertPath, const char* fragPath);
 			~Shader();
@@ -41,7 +41,6 @@ namespace sa3d {
 		private:
 			/**Gets values for shaders in function*/
 			GLint getUniformLocation(const GLchar* name);
-			GLuint load();
 			void checkCompileErrors(unsigned int shader, std::string type);
 
 		};

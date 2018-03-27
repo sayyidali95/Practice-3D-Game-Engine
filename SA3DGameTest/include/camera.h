@@ -3,7 +3,7 @@
 #include <vector>
 
 
-#include <GL/glew.h>
+#include <glad/glad.h>
 #include "graphics.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"

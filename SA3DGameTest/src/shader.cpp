@@ -6,7 +6,59 @@ namespace sa3d {
 		Shader::Shader(const char* vertPath, const char* fragPath)
 			: m_VertPath(vertPath), m_FragPath(fragPath)
 		{
-			m_ShaderID = load();
+			// 1. retrieve the vertex/fragment source code from filePath
+			std::string vertexCode;
+			std::string fragmentCode;
+			std::ifstream vShaderFile;
+			std::ifstream fShaderFile;
+			// ensure ifstream objects can throw exceptions:
+			vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+			fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+			try
+			{
+				// open files
+				vShaderFile.open(m_VertPath);
+				fShaderFile.open(m_FragPath);
+				std::stringstream vShaderStream, fShaderStream;
+				// read file's buffer contents into streams
+				vShaderStream << vShaderFile.rdbuf();
+				fShaderStream << fShaderFile.rdbuf();
+				// close file handlers
+				vShaderFile.close();
+				fShaderFile.close();
+				// convert stream into string
+				vertexCode = vShaderStream.str();
+				fragmentCode = fShaderStream.str();
+			}
+			catch (std::ifstream::failure e)
+			{
+				std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+			}
+			const char* vShaderCode = vertexCode.c_str();
+			const char * fShaderCode = fragmentCode.c_str();
+			// 2. compile shaders
+			unsigned int vertex, fragment;
+			int success;
+			char infoLog[512];
+			// vertex shader
+			vertex = glCreateShader(GL_VERTEX_SHADER);
+			glShaderSource(vertex, 1, &vShaderCode, NULL);
+			glCompileShader(vertex);
+			checkCompileErrors(vertex, "VERTEX");
+			// fragment Shader
+			fragment = glCreateShader(GL_FRAGMENT_SHADER);
+			glShaderSource(fragment, 1, &fShaderCode, NULL);
+			glCompileShader(fragment);
+			checkCompileErrors(fragment, "FRAGMENT");
+			// shader Program
+			m_ShaderID = glCreateProgram();
+			glAttachShader(m_ShaderID, vertex);
+			glAttachShader(m_ShaderID, fragment);
+			glLinkProgram(m_ShaderID);
+			checkCompileErrors(m_ShaderID, "PROGRAM");
+			// delete the shaders as they're linked into our program now and no longer necessary
+			glDeleteShader(vertex);
+			glDeleteShader(fragment);
 		}
 
 		Shader::~Shader()
@@ -14,97 +66,6 @@ namespace sa3d {
 			glDeleteProgram(m_ShaderID);
 		}
 
-		GLuint Shader::load()
-		{
-			
-			GLuint vertex = glCreateShader(GL_VERTEX_SHADER);
-			GLuint fragment = glCreateShader(GL_FRAGMENT_SHADER);
-			std::ifstream vShaderFile;
-			std::ifstream fShaderFile;
-			std::string vertSourceString;
-			std::string fragSourceString;
-
-
-			// ensures ifstream objects can throw exceptions:
-			vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-			fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-			try
-			{
-				/**Opens Files*/
-				vShaderFile.open(m_VertPath);
-				fShaderFile.open(m_FragPath);
-				std::stringstream vShaderStream, fShaderStream;
-				/* Read file's buffer contents into streams*/
-				vShaderStream << vShaderFile.rdbuf();
-				fShaderStream << fShaderFile.rdbuf();
-				// close file handlers
-				vShaderFile.close();
-				fShaderFile.close();
-
-				vertSourceString = vShaderStream.str();
-				fragSourceString = fShaderStream.str();
-			}
-			catch (std::ifstream::failure e)
-			{
-				std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
-			}
-
-			const GLchar* vertSource = vertSourceString.c_str();
-			const GLchar* fragSource = fragSourceString.c_str();
-
-
-
-			glShaderSource(vertex, 1, &vertSource, NULL);
-			glCompileShader(vertex);
-			checkCompileErrors(vertex, "VERTEX");
-			
-			GLint result;
-			glGetShaderiv(vertex, GL_COMPILE_STATUS, &result);
-			if (result == GL_FALSE)
-			{
-				GLint length;
-				glGetShaderiv(vertex, GL_INFO_LOG_LENGTH, &length);
-				std::vector<char> error(length);
-				glGetShaderInfoLog(vertex, length, &length, &error[0]);
-				std::cout << "Failed to compile vertex shader!" << std::endl <<
-					&error[0] << std::endl;
-				glDeleteShader(vertex);
-				return 0;
-			}
-
-
-			glShaderSource(fragment, 1, &fragSource, NULL);
-			glCompileShader(fragment);
-			checkCompileErrors(fragment, "FRAGMENT");
-
-			glGetShaderiv(fragment, GL_COMPILE_STATUS, &result);
-			if (result == GL_FALSE)
-			{
-				GLint length;
-				glGetShaderiv(fragment, GL_INFO_LOG_LENGTH, &length);
-				std::vector<char> error(length);
-				glGetShaderInfoLog(fragment, length, &length, &error[0]);
-				std::cout << "Failed to compile fragment shader!" << std::endl <<
-					&error[0] << std::endl;
-				glDeleteShader(fragment);
-				return 0;
-			}
-			//shader program
-			program = glCreateProgram();
-			glAttachShader(program, vertex);
-			glAttachShader(program, fragment);
-
-			glLinkProgram(program);
-			//glValidateProgram(program);
-
-			//glDetachShader(program, vertex);
-			//glDetachShader(program, fragment);
-
-			glDeleteShader(vertex);
-			glDeleteShader(fragment);
-
-			//return program;
-		}
 
 		GLint Shader::getUniformLocation(const GLchar* name)
 		{
@@ -168,6 +129,15 @@ namespace sa3d {
 				{
 					glGetShaderInfoLog(shader, 1024, NULL, infoLog);
 					std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+				}
+			}
+			else
+			{
+				glGetProgramiv(shader, GL_LINK_STATUS, &success);
+				if (!success)
+				{
+					glGetProgramInfoLog(shader, 1024, NULL, infoLog);
+					std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
 				}
 			}
 		}

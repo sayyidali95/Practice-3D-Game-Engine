@@ -1,0 +1,24 @@
+# Blender MTL File: 'BossModel.blend'
+# Material Count: 2
+
+newmtl enemyMask
+Ns 96.078431
+Ka 1.000000 1.000000 1.000000
+Kd 0.696596 0.740657 0.740657
+Ks 0.500000 0.500000 0.500000
+Ke 0.609521 0.648075 0.648075
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd D:\Users\User\Documents\SA3D random assets\blue-texture_1253-162.jpg
+
+newmtl enemySkin
+Ns 96.078431
+Ka 0.968421 0.968421 0.968421
+Kd 0.004322 0.007998 0.008870
+Ks 0.500000 0.500000 0.500000
+Ke 0.002701 0.004999 0.005544
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd D:\Users\User\Documents\SA3D random assets\blue-texture_1253-162.jpg

@@ -41,16 +41,19 @@
     <ClInclude Include="include\model.h" />
     <ClInclude Include="include\shader.h" />
     <ClInclude Include="include\shapes.h" />
-    <ClInclude Include="include\stb_image.h" />
     <ClInclude Include="include\vertex_array.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\color.fs" />
     <None Include="shaders\color.vs" />
+    <None Include="shaders\coordinates.fs" />
+    <None Include="shaders\coordinates.vs" />
     <None Include="shaders\lamp.fs" />
     <None Include="shaders\lamp.vs" />
     <None Include="shaders\playerModel.fs" />
     <None Include="shaders\playerModel.vs" />
+    <None Include="shaders\texture.fs" />
+    <None Include="shaders\texture.vs" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
