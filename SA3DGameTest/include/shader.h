@@ -42,6 +42,7 @@ namespace sa3d {
 			/**Gets values for shaders in function*/
 			GLint getUniformLocation(const GLchar* name);
 			GLuint load();
+			void checkCompileErrors(unsigned int shader, std::string type);
 
 		};
 

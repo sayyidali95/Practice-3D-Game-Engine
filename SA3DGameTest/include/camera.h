@@ -4,6 +4,7 @@
 
 
 #include <GL/glew.h>
+#include "graphics.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
@@ -59,4 +60,6 @@ namespace sa3d {
 		void updateCameraVectors();
 
 	};
+
+	void cameraMovement(graphics::Window *window, Camera cam, GLfloat dt);
 }

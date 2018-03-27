@@ -59,6 +59,10 @@ namespace sa3d {
 				return false;
 			}
 
+			// configure global opengl state
+			// -----------------------------
+			glEnable(GL_DEPTH_TEST);
+
 
 			std::cout << "OpenGL" << glGetString(GL_VERSION) << std::endl;
 			return true;

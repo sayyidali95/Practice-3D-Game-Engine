@@ -19,22 +19,38 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\buffer.cpp" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\graphics.cpp" />
+    <ClCompile Include="src\index_buffer.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\mesh.cpp" />
     <ClCompile Include="src\model.cpp" />
     <ClCompile Include="src\shader.cpp" />
+    <ClCompile Include="src\shapes.cpp" />
     <ClCompile Include="src\stb_image.cpp" />
+    <ClCompile Include="src\vertex_array.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\buffer.h" />
     <ClInclude Include="include\camera.h" />
     <ClInclude Include="include\graphics.h" />
+    <ClInclude Include="include\index_buffer.h" />
     <ClInclude Include="include\mesh.h" />
     <ClInclude Include="include\model.h" />
     <ClInclude Include="include\shader.h" />
+    <ClInclude Include="include\shapes.h" />
     <ClInclude Include="include\stb_image.h" />
+    <ClInclude Include="include\vertex_array.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\color.fs" />
+    <None Include="shaders\color.vs" />
+    <None Include="shaders\lamp.fs" />
+    <None Include="shaders\lamp.vs" />
+    <None Include="shaders\playerModel.fs" />
+    <None Include="shaders\playerModel.vs" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -90,14 +106,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>D:\Users\Sayyid\3DProjects\include;$(IncludePath)</IncludePath>
     <LibraryPath>D:\Users\Sayyid\3DProjects\lib;$(LibraryPath)</LibraryPath>
-    <SourcePath>D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\include;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\src;$(SourcePath)</SourcePath>
+    <SourcePath>D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\include;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\src;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\shaders;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\models;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\include;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\src;$(SourcePath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\include;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\src;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\shaders;$(SourcePath);D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\models;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>

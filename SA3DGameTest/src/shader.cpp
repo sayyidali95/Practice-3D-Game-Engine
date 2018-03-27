@@ -56,6 +56,7 @@ namespace sa3d {
 
 			glShaderSource(vertex, 1, &vertSource, NULL);
 			glCompileShader(vertex);
+			checkCompileErrors(vertex, "VERTEX");
 			
 			GLint result;
 			glGetShaderiv(vertex, GL_COMPILE_STATUS, &result);
@@ -74,7 +75,7 @@ namespace sa3d {
 
 			glShaderSource(fragment, 1, &fragSource, NULL);
 			glCompileShader(fragment);
-
+			checkCompileErrors(fragment, "FRAGMENT");
 
 			glGetShaderiv(fragment, GL_COMPILE_STATUS, &result);
 			if (result == GL_FALSE)
@@ -154,6 +155,21 @@ namespace sa3d {
 		void Shader::disable() const
 		{
 			glUseProgram(0);
+		}
+
+		void Shader::checkCompileErrors(unsigned int shader, std::string type)
+		{
+			int success;
+			char infoLog[1024];
+			if (type != "PROGRAM")
+			{
+				glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+				if (!success)
+				{
+					glGetShaderInfoLog(shader, 1024, NULL, infoLog);
+					std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+				}
+			}
 		}
 
 	}
