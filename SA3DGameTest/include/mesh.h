@@ -33,6 +33,8 @@ namespace sa3d {
 			glm::vec3 Position;
 			glm::vec3 Normal;
 			glm::vec2 TexCoords;
+			glm::vec3 Tangent;
+			glm::vec3 Bitangent;
 		};
 
 		/**
@@ -40,7 +42,7 @@ namespace sa3d {
 		**/
 
 		struct Texture {
-			GLuint id;
+			unsigned int id;
 			std::string type;
 			aiString path;
 		};
@@ -54,6 +56,7 @@ namespace sa3d {
 			std::vector<Vertex> vertices;
 			std::vector<GLuint> indices;
 			std::vector<Texture> textures;
+			unsigned int VAO;
 			/*  Functions  */
 			/**Constructor */
 			Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, std::vector<Texture> textures);
@@ -62,7 +65,7 @@ namespace sa3d {
 			void Draw(Shader shader);
 		private:
 			/*  Render data  */
-			GLuint VAO, VBO, EBO;
+			GLuint VBO, EBO;
 			/*  Functions    */
 			void setupMesh();
 		};

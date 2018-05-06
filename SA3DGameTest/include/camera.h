@@ -14,7 +14,9 @@ namespace sa3d {
 		FORWARD,
 		BACKWARD,
 		LEFT,
-		RIGHT
+		RIGHT,
+		UP,
+		DOWN
 	};
 
 	// Default camera values
@@ -40,6 +42,7 @@ namespace sa3d {
 		GLfloat MovementSpeed;
 		GLfloat MouseSensitivity;
 		GLfloat Zoom;
+		graphics::Window *window;
 
 		/**Constructor */
 		Camera(glm::vec3 position, glm::vec3 up, GLfloat yaw = YAW, GLfloat pitch = PITCH);

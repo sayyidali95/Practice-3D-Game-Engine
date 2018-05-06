@@ -51,6 +51,9 @@
     <ClCompile Include="src\shapes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\graphics.h">
@@ -78,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\vertex_array.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -110,6 +116,12 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="shaders\coordinates.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\basic_lighting.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\basic_lighting.fs">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

@@ -38,6 +38,10 @@ namespace sa3d {
 			this->Position -= this->Right * velocity;
 		if (direction == RIGHT)
 			this->Position += this->Right * velocity;
+		if (direction == UP)
+			this->Position += this->Up * velocity;
+		if (direction == DOWN)
+			this->Position -= this->Up * velocity;
 	}
 
 	void Camera::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch = true)
@@ -85,6 +89,7 @@ namespace sa3d {
 	}
 	void cameraMovement(graphics::Window *window, Camera cam, GLfloat dt)
 	{
+		
 		// Camera controls
 		if (window->m_Keys[GLFW_KEY_UP])
 			cam.ProcessKeyboard(FORWARD, dt);
@@ -94,6 +99,10 @@ namespace sa3d {
 			cam.ProcessKeyboard(LEFT, dt);
 		if (window->m_Keys[GLFW_KEY_RIGHT])
 			cam.ProcessKeyboard(RIGHT, dt);
+		if (window->m_Keys[GLFW_KEY_W])
+			cam.ProcessKeyboard(UP, dt);
+		if (window->m_Keys[GLFW_KEY_S])
+			cam.ProcessKeyboard(DOWN, dt);
 
 	}
 
