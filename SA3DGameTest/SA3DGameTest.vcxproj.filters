@@ -124,5 +124,11 @@
     <None Include="shaders\basic_lighting.fs">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="shaders\lightCasters.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\lightCasters.fs">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
