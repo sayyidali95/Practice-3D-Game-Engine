@@ -22,10 +22,11 @@ namespace sa3d {
 	{
 	public:
 		bool inuse = false;
-		int uid;    /**<unique id of this entity*/
+		int refID;    /**<unique id of this entity*/
 		char name[128];
-		glm::mat4 transform = glm::mat4();
 
+		/** Transform variables */
+		glm::mat4 transform = glm::mat4();
 		glm::vec3 position;
 		glm::vec3 acceleration;
 		glm::vec3 rotation;
@@ -33,23 +34,35 @@ namespace sa3d {
 		glm::vec4 color;
 		GLchar* objPath;
 		graphics::Model *obj;
+
+		/**States and other Info */
 		int state;
 		float frame;
+		bool dead;
 		graphics::Texture *texture;
 
 		/**Entity Constructor*/
 		Entity();
 
-		virtual void draw(graphics::Shader shaderID);
-		//virtual void update();
+		virtual void draw(graphics::Shader shaderID);	/** Draws Entity with the given Shader*/
+		void free();							/**Free Entity Memory*/
+		
+		/**Entity Interactions and Behaviors */
+		virtual void think();							/**Updates Entity Behavior*/
+		virtual void touch(Entity* other);				/**Updates interaction between two Entities*/
+		virtual void update();							/** updates Entity State*/
 
 
 	};
 
+	//entity Manager
+	void entityManagerInit(int maxEntities);
+
 	//global entity functions
-	void entity_draw_all(Camera camera);
-	void entity_think_all();
-	void entity_clear_all();
+	void entityDrawAll(graphics::Shader shaderID);
+	void entityThinkAll();
+	void entityUpdateAll();
+	void entityClearAll();
 }
 
 #endif

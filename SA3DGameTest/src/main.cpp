@@ -7,7 +7,8 @@
 #include "graphics.h"
 #include "shader.h"
 #include "model.h"
-#include "camera.h";
+#include "camera.h"
+#include "entity.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include <glm/gtc/type_ptr.hpp>
@@ -40,6 +41,16 @@ int main()
 	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 	
 
+	//Initialize resource managers
+	entityManagerInit(1024);
+
+
+	//initialize player
+	Entity* player = new Entity();
+	//player->transform = glm::scale(player->transform, player->scale);
+	player->transform = glm::translate(player->transform, glm::vec3(0.0f, -3.0f, -3.0f)); // Translate it down a bit so it's at the center of the scene
+	player->transform = glm::scale(player->transform, glm::vec3(0.4f, 0.4f, 0.4f));	// It's a bit too big for our scene, so scale it down
+
 	glm::mat4 projection = glm::perspective(camera.Zoom, (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
 	glm::mat4 view = camera.getViewMatrix();
 
@@ -50,7 +61,7 @@ int main()
 	Shader lightingShader("shaders/basic_lighting.vs", "shaders/basic_lighting.fs");
 	Shader lampShader("shaders/lamp.vs", "shaders/lamp.fs");
 	//render model
-	Model player("models/nanosuit.obj");
+	player->obj = new Model("models/nanosuit.obj");
 	
 
 
@@ -92,10 +103,12 @@ int main()
 		playerShader.setUniformMat4("view", view);
 
 		
-		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
+		model = glm::translate(model , glm::vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
 		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
 		playerShader.setUniformMat4("model", model);
-		player.Draw(playerShader);
+
+		
+		player->draw(playerShader);
 		//playerShader.disable();
 		
 		//camera movement

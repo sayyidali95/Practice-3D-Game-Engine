@@ -34,6 +34,7 @@
     <ClCompile Include="src\vertex_array.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="entityManager.h" />
     <ClInclude Include="include\buffer.h" />
     <ClInclude Include="include\camera.h" />
     <ClInclude Include="include\entity.h" />
