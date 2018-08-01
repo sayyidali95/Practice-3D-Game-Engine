@@ -65,6 +65,7 @@ namespace sa3d {
 	void entityThinkAll();
 	void entityUpdateAll();
 	void entityClearAll();
+	void entityGetCount();								/**Get Count of all entities in the entityManager*/
 }
 
 #endif

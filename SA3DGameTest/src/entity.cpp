@@ -193,6 +193,9 @@ namespace sa3d {
 		entityManager->DrawAll(shaderID);
 	}
 
-	
+	void entityGetCount() 
+	{
+		cout << entityManager->GetEntityCount() << endl;
+	}
 
 }

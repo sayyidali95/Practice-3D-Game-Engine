@@ -9,6 +9,7 @@
 #include "model.h"
 #include "camera.h"
 #include "entityManager.h"
+#include "player.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include <glm/gtc/type_ptr.hpp>
@@ -39,14 +40,14 @@ int main()
 	Window window(w, "SA Game Test", screenWidth, screenHeight);
 	Window* pWindow = &window;
 	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
-	//EntityManager* entityManager = new EntityManager();
+	
 
 	//Initialize resource managers
 
 
 
 	//initialize player
-	Entity* player = new Entity();
+	Entity* player = new Player();
 	Entity* player2 = new Entity();
 	
 	player->transform = glm::translate(player->transform, glm::vec3(0.0f, -3.0f, -3.0f)); // Translate it down a bit so it's at the center of the scene
@@ -62,9 +63,9 @@ int main()
 	Shader lightingShader("shaders/basic_lighting.vs", "shaders/basic_lighting.fs");
 	Shader lampShader("shaders/lamp.vs", "shaders/lamp.fs");
 	//render model
-	player->obj = new Model("models/nanosuit.obj");
+	player2->obj = new Model("models/nanosuit.obj");
 	
-	//entityManager->Add(player);
+	
 
 
 	/**@brief Game Loop **/
@@ -108,9 +109,10 @@ int main()
 		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
 		playerShader.setUniformMat4("model", model);
 
-		
+		doMovement(pWindow, player);
 		entityDrawAll(playerShader);
-		//cout << player2->refID << endl;
+		//player2->draw(playerShader);
+		entityGetCount();
 		//playerShader.disable();
 		
 		//camera movement

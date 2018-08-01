@@ -15,26 +15,11 @@ namespace sa3d {
 	{
 		
 		if (entityList.empty())
-		{
 			entity->refID = 0;
-			entity->inuse = true;
+			
 			entityList.push_back(entity);
-			
-		}
-		else 
-		{
-			for (unsigned i = 0; i < entityList.size(); i++)
-			{
-				
-				if (entityList[i]->inuse == false)
-				{
-					//entity->refID = entityID++;
-					entityList.push_back(entity);
-					break;
-				}
-			
-			}
-		}
+
+
 		
 		
 
@@ -64,7 +49,7 @@ namespace sa3d {
 
 	void EntityManager::DrawAll(graphics::Shader shaderID)
 	{
-		for(unsigned int i=0; i<entityList.size();i++)
+		for(unsigned int i=0; i < entityList.size(); i++)
 			entityList[i]->draw(shaderID);
 	}
 }

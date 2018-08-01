@@ -29,6 +29,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\mesh.cpp" />
     <ClCompile Include="src\model.cpp" />
+    <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\shader.cpp" />
     <ClCompile Include="src\shapes.cpp" />
     <ClCompile Include="src\stb_image.cpp" />
@@ -43,6 +44,7 @@
     <ClInclude Include="include\index_buffer.h" />
     <ClInclude Include="include\mesh.h" />
     <ClInclude Include="include\model.h" />
+    <ClInclude Include="include\player.h" />
     <ClInclude Include="include\shader.h" />
     <ClInclude Include="include\shapes.h" />
     <ClInclude Include="include\vertex_array.h" />
