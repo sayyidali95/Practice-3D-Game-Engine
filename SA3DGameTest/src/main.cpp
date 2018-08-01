@@ -47,9 +47,8 @@ int main()
 
 	//initialize player
 	Entity* player = new Entity();
+	Entity* player2 = new Entity();
 	
-	//player = entity_new();
-	//player->transform = glm::scale(player->transform, player->scale);
 	player->transform = glm::translate(player->transform, glm::vec3(0.0f, -3.0f, -3.0f)); // Translate it down a bit so it's at the center of the scene
 	player->transform = glm::scale(player->transform, glm::vec3(0.4f, 0.4f, 0.4f));	// It's a bit too big for our scene, so scale it down
 
@@ -111,7 +110,7 @@ int main()
 
 		
 		entityDrawAll(playerShader);
-		//cout << entityManager->GetEntityCount() << endl;
+		//cout << player2->refID << endl;
 		//playerShader.disable();
 		
 		//camera movement

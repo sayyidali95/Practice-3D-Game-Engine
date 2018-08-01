@@ -3,7 +3,7 @@
 namespace sa3d {
 	EntityManager::EntityManager()
 	{
-
+		//entityList.resize(maxEntities);
 	}
 
 	EntityManager::~EntityManager()
@@ -13,16 +13,31 @@ namespace sa3d {
 
 	void EntityManager::Add(Entity* entity)
 	{
-		//unsigned int  i;
-		//for (i = 0; i < entityList.size(); i++)
-		//{
-		//	if (entityList[i]->inuse == false)
-		//	{
-	
-				entityList.push_back(entity);
+		
+		if (entityList.empty())
+		{
+			entity->refID = 0;
+			entity->inuse = true;
+			entityList.push_back(entity);
+			
+		}
+		else 
+		{
+			for (unsigned i = 0; i < entityList.size(); i++)
+			{
 				
-		//	}
-		//}
+				if (entityList[i]->inuse == false)
+				{
+					//entity->refID = entityID++;
+					entityList.push_back(entity);
+					break;
+				}
+			
+			}
+		}
+		
+		
+
 	}
 
 	void EntityManager::Remove(Entity* entity)

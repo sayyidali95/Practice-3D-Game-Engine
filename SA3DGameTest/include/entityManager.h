@@ -16,8 +16,9 @@ public:
 	void Remove(Entity* entity);			/**Remove Entity from Manager list */
 	int GetEntityCount() const;				/**Get Entity count in list*/
 	Entity* Get(int refId) const;	/**Get Entity reference*/
-
+	
 	void DrawAll(graphics::Shader shaderID);
+	int entityID;
 
 private:
 	std::vector<Entity*> entityList;

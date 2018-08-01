@@ -18,20 +18,20 @@ namespace sa3d {
 
 
 	static EntityManager* entityManager = new EntityManager();
-
+	
 	char snum[5];
 
 	Entity::Entity()
 	{
-		//refID = entityManager.incr++;
+		
 		inuse = true;
-
+		
 		scale = glm::vec3(1, 1, 1);
 		color = glm::vec4(255, 255, 255, 255);
 		transform = glm::mat4();
-
+		refID = entityManager->entityID++;
 		entityManager->Add(this);
-
+		
 	}
 
 
