@@ -1,4 +1,5 @@
 #include "entity.h"
+#include "entityManager.h"
 
 namespace sa3d {
 
@@ -9,74 +10,86 @@ namespace sa3d {
 		ALLY,
 	};
 
-	typedef struct {
-		int maxEntities;
-		Entity * entityList;
-		int incr;
-	}EntityManager;
+	//typedef struct {
+	//	int maxEntities;
+	//	std::vector<Entity> entityList;
+	//	int incr;
+	//}EntityManager;
 
 
-	static EntityManager entityManager = { 0 };
+	static EntityManager* entityManager = new EntityManager();
 
 	char snum[5];
 
 	Entity::Entity()
 	{
-		int i;
-		for (i = 0; i < entityManager.maxEntities; i++)
-		{
-			if (!entityManager.entityList[i].inuse)
-			{
-				
+		//refID = entityManager.incr++;
+		inuse = true;
 
-				refID = entityManager.incr++;
-				inuse = true;
-				//entityManager.entityList[i].normalGravity = 0.5f;
+		scale = glm::vec3(1, 1, 1);
+		color = glm::vec4(255, 255, 255, 255);
+		transform = glm::mat4();
 
-				/*itoa(entityManager.entityList[i].refID, snum, 10);
-				printf("%s\n", snum);*/
-				scale = glm::vec3(1, 1, 1);
-				color = glm::vec4(255, 255, 255, 255);
-				
+		entityManager->Add(this);
 
-			}
-		}
-		
 	}
 
+
+	Entity::~Entity()
+	{
+
+	}
+
+	//Entity *entity_new()
+	//{
+	//	int i;
+	//	for (i = 0; i < entityManager.maxEntities; i++)
+	//	{  
+	//		if (!entityManager.entityList[i].inuse)
+	//		{
+	//			
+	//			memset(&entityManager.entityList[i], 0, sizeof(Entity));
+	//			entityManager.entityList[i].refID = entityManager.incr++;
+	//			entityManager.entityList[i].inuse = 1;
+	//			//entityManager.entityList[i].normalGravity = 0.5f;
+
+	//			//itoa(entityManager.entityList[i].refID, snum, 10);
+	//			//printf("%s\n", snum);
+	//			entityManager.entityList[i].scale = glm::vec3(1, 1, 1);
+	//			entityManager.entityList[i].color = glm::vec4(255, 255, 255, 255);
+	//			entityManager.entityList[i].transform = glm::mat4();
+	//			return &entityManager.entityList[i];
+
+	//		}
+	//	}
+	//	return NULL;
+	//}
 	
 
-	void entity_manager_close()
-	{
-		int i;
+	//void entity_manager_close()
+	//{
+	//	int i;
+	//	entityManager.entityList.clear();
 
-		if (entityManager.entityList != 0)
-		{
-			for (i = 0; i < entityManager.maxEntities; i++)
-			{
-				entityManager.entityList[i].free();
-			}
-			free(entityManager.entityList);
-		}
-		memset(&entityManager, 0, sizeof(EntityManager));
-		printf("Closed Entity Manager");
-	}
+	//	memset(&entityManager, 0, sizeof(EntityManager));
+	//	printf("Closed Entity Manager");
+	//}
 
-	void entityManagerInit(int maxEntities)
-	{
-		if (!maxEntities)
-		{
-			printf("already initialized");
-			return;
-		}
-		entityManager.entityList = new Entity[maxEntities];
-		if (!entityManager.entityList)
-		{
-			printf("failed to allocate entity list");
-			entity_manager_close();
-			return;
-		}
-	}
+	//void entityManagerInit(int maxEntities)
+	//{
+	//	if (!maxEntities)
+	//	{
+	//		printf("already initialized");
+	//		return;
+	//	}
+	//	entityManager.entityList.resize(maxEntities);
+	//	if (entityManager.entityList.empty())
+	//	{
+	//		printf("failed to allocate entity list");
+	//		entity_manager_close();
+	//		return;
+	//	}
+	//}
 
 	void Entity::draw(graphics::Shader shaderID)
 	{
@@ -161,30 +174,23 @@ namespace sa3d {
 
 
 
-	void entityThinkAll()
-	{
-		int i;
-		
-		for (i = 0; i < entityManager.maxEntities; i++)
-		{
-				if ((entityManager.entityList[i].inuse))
-				{
-					entityManager.entityList[i].think();
-				}
+	//void entityThinkAll()
+	//{
+	//	int i;
+	//	
+	//	for (i = 0; i < entityManager.maxEntities; i++)
+	//	{
+	//			if ((entityManager.entityList[i].inuse))
+	//			{
+	//				entityManager.entityList[i].think();
+	//			}
 
-		}
-	}
-	
+	//	}
+	//}
+	//
 	void entityDrawAll(graphics::Shader shaderID)
 	{
-		int i;
-		for (i = 0; i < entityManager.maxEntities; i++)
-		{
-			if (entityManager.entityList[i].inuse)
-			{
-				entityManager.entityList[i].draw(shaderID);
-			}
-		}
+		entityManager->DrawAll(shaderID);
 	}
 
 	

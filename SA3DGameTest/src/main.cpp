@@ -8,7 +8,7 @@
 #include "shader.h"
 #include "model.h"
 #include "camera.h"
-#include "entity.h"
+#include "entityManager.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include <glm/gtc/type_ptr.hpp>
@@ -39,14 +39,16 @@ int main()
 	Window window(w, "SA Game Test", screenWidth, screenHeight);
 	Window* pWindow = &window;
 	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
-	
+	//EntityManager* entityManager = new EntityManager();
 
 	//Initialize resource managers
-	entityManagerInit(1024);
+
 
 
 	//initialize player
 	Entity* player = new Entity();
+	
+	//player = entity_new();
 	//player->transform = glm::scale(player->transform, player->scale);
 	player->transform = glm::translate(player->transform, glm::vec3(0.0f, -3.0f, -3.0f)); // Translate it down a bit so it's at the center of the scene
 	player->transform = glm::scale(player->transform, glm::vec3(0.4f, 0.4f, 0.4f));	// It's a bit too big for our scene, so scale it down
@@ -63,7 +65,7 @@ int main()
 	//render model
 	player->obj = new Model("models/nanosuit.obj");
 	
-
+	//entityManager->Add(player);
 
 
 	/**@brief Game Loop **/
@@ -108,7 +110,8 @@ int main()
 		playerShader.setUniformMat4("model", model);
 
 		
-		player->draw(playerShader);
+		entityDrawAll(playerShader);
+		//cout << entityManager->GetEntityCount() << endl;
 		//playerShader.disable();
 		
 		//camera movement

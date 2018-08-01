@@ -11,7 +11,7 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
-#define MAX_ENTITIES 1024
+#define MAX_ENTITIES 2048
 
 namespace sa3d {
 	/**EntitySystem variables*/
@@ -43,6 +43,8 @@ namespace sa3d {
 
 		/**Entity Constructor*/
 		Entity();
+		virtual ~Entity();
+
 
 		virtual void draw(graphics::Shader shaderID);	/** Draws Entity with the given Shader*/
 		void free();							/**Free Entity Memory*/
@@ -54,7 +56,7 @@ namespace sa3d {
 
 
 	};
-
+	Entity *entity_new();
 	//entity Manager
 	void entityManagerInit(int maxEntities);
 
