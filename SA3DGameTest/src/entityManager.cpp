@@ -19,10 +19,6 @@ namespace sa3d {
 			
 			entityList.push_back(entity);
 
-
-		
-		
-
 	}
 
 	void EntityManager::Remove(Entity* entity)
@@ -45,6 +41,30 @@ namespace sa3d {
 	int EntityManager::GetEntityCount() const
 	{
 		return entityList.size();
+	}
+
+	void EntityManager::ThinkAll()
+	{
+		for (unsigned int i = 0; i < entityList.size(); i++)
+			entityList[i]->think();
+	}
+	
+	void EntityManager::UpdateAll()
+	{
+		for (unsigned int i = 0; i < entityList.size(); i++)
+		{
+			if (entityList[i]->inuse == 0)
+				continue;
+			entityList[i]->update();
+		}
+	}
+
+	void EntityManager::TouchAll()
+	{
+		for (unsigned int i = 0; i < entityList.size(); i++)
+		{
+
+		}
 	}
 
 	void EntityManager::DrawAll(graphics::Shader shaderID)

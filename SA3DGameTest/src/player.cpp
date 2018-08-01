@@ -8,7 +8,9 @@ namespace sa3d {
 		this->obj = new graphics::Model("models/BossModel.obj");
 	};
 
-
+	void Player::update() {
+		printf("player is alive");
+	}
 
 	void doMovement(graphics::Window *window, Entity *object)
 	{

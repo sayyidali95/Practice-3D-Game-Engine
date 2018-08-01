@@ -120,11 +120,6 @@ namespace sa3d {
 			return;
 		}
 
-
-		if (&Entity::think != NULL)
-		{
-			think();
-		}
 	}
 
 	void Entity::touch(Entity * other)
@@ -141,10 +136,7 @@ namespace sa3d {
 			return;
 		}
 
-		if (&Entity::touch != NULL)
-		{
-			touch(other);
-		}
+	
 	}
 
 	void Entity::update()
@@ -165,29 +157,23 @@ namespace sa3d {
 			return;
 		}
 
-		if (&Entity::update != NULL)
-		{
-			update();
-		}
+
 	}
 
 
 
 
-	//void entityThinkAll()
-	//{
-	//	int i;
-	//	
-	//	for (i = 0; i < entityManager.maxEntities; i++)
-	//	{
-	//			if ((entityManager.entityList[i].inuse))
-	//			{
-	//				entityManager.entityList[i].think();
-	//			}
+	void entityThinkAll()
+	{
+		entityManager->ThinkAll();
 
-	//	}
-	//}
-	//
+	}
+
+	void entityUpdateAll()
+	{
+		entityManager->UpdateAll();
+	}
+	
 	void entityDrawAll(graphics::Shader shaderID)
 	{
 		entityManager->DrawAll(shaderID);

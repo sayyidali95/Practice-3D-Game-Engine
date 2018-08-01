@@ -17,6 +17,9 @@ public:
 	int GetEntityCount() const;				/**Get Entity count in list*/
 	Entity* Get(int refId) const;	/**Get Entity reference*/
 	
+	void ThinkAll();
+	void TouchAll();
+	void UpdateAll();
 	void DrawAll(graphics::Shader shaderID);
 	int entityID;
 

@@ -21,6 +21,7 @@ namespace sa3d {
 	class Entity
 	{
 	public:
+	
 		bool inuse = false;
 		int refID;    /**<unique id of this entity*/
 		char name[128];
@@ -63,6 +64,7 @@ namespace sa3d {
 	//global entity functions
 	void entityDrawAll(graphics::Shader shaderID);
 	void entityThinkAll();
+	void entityTouchAll();
 	void entityUpdateAll();
 	void entityClearAll();
 	void entityGetCount();								/**Get Count of all entities in the entityManager*/

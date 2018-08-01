@@ -12,6 +12,7 @@ namespace sa3d {
 	public:
 		Player();
 
+		void update();
 
 	};
 

@@ -110,9 +110,13 @@ int main()
 		playerShader.setUniformMat4("model", model);
 
 		doMovement(pWindow, player);
+		entityUpdateAll();
+		//player2->update();
 		entityDrawAll(playerShader);
-		//player2->draw(playerShader);
+		
 		entityGetCount();
+		//cout << player->refID << endl;
+		//cout << player2->refID << endl;
 		//playerShader.disable();
 		
 		//camera movement
