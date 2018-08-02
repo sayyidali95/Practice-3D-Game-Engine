@@ -86,4 +86,10 @@ namespace sa3d {
 		for(unsigned int i=0; i < entityList.size(); i++)
 			entityList[i]->draw(shaderID);
 	}
+
+	void EntityManager::ClearAll()
+	{
+		entityList.clear();
+
+	}
 }

@@ -141,6 +141,7 @@ int main()
 
 		window.update();
 	}
+	entityManagerClose();
 	glClear(GL_COLOR_BUFFER_BIT);
 	glfwTerminate();
 	return 0;

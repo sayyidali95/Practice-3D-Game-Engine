@@ -60,8 +60,9 @@ namespace sa3d {
 	Entity *entity_new();
 	//entity Manager
 	void entityManagerInit(int maxEntities);
+	void entityManagerClose();
 
-	//global entity functions
+	/** global entity functions that update the static entity manager*/
 	void entityDrawAll(graphics::Shader shaderID);
 	void entityThinkAll();
 	void entityTouchAll();

@@ -10,12 +10,6 @@ namespace sa3d {
 		ALLY,
 	};
 
-	//typedef struct {
-	//	int maxEntities;
-	//	std::vector<Entity> entityList;
-	//	int incr;
-	//}EntityManager;
-
 
 	static EntityManager* entityManager = new EntityManager();
 	
@@ -66,14 +60,12 @@ namespace sa3d {
 	//}
 	
 
-	//void entity_manager_close()
-	//{
-	//	int i;
-	//	entityManager.entityList.clear();
-
-	//	memset(&entityManager, 0, sizeof(EntityManager));
-	//	printf("Closed Entity Manager");
-	//}
+	void entityManagerClose()
+	{
+		entityManager->ClearAll();					
+		memset(&entityManager, 0, sizeof(EntityManager));
+		printf("Closed Entity Manager");
+	}
 
 	//void entityManagerInit(int maxEntities)
 	//{
