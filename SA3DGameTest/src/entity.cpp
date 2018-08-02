@@ -169,6 +169,12 @@ namespace sa3d {
 
 	}
 
+	void entityTouchAll()
+	{
+		entityManager->TouchAll();
+
+	}
+
 	void entityUpdateAll()
 	{
 		entityManager->UpdateAll();

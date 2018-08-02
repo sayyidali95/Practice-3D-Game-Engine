@@ -46,7 +46,29 @@ namespace sa3d {
 	void EntityManager::ThinkAll()
 	{
 		for (unsigned int i = 0; i < entityList.size(); i++)
+		{
+			if (entityList[i]->inuse == 0)
+				continue;
 			entityList[i]->think();
+		}
+	}
+
+	void EntityManager::TouchAll()
+	{
+		for (unsigned int i = 0; i < entityList.size(); i++)
+		{
+			if (entityList[i]->inuse == 0)
+				continue;
+
+				for (int j = 0; j < entityList.size(); j++)
+				{
+					if (entityList[i]->inuse == 0)
+						continue;
+					if (j == i)
+						continue;
+					entityList[i]->touch(entityList[j]);
+				}
+		}
 	}
 	
 	void EntityManager::UpdateAll()
@@ -56,14 +78,6 @@ namespace sa3d {
 			if (entityList[i]->inuse == 0)
 				continue;
 			entityList[i]->update();
-		}
-	}
-
-	void EntityManager::TouchAll()
-	{
-		for (unsigned int i = 0; i < entityList.size(); i++)
-		{
-
 		}
 	}
 

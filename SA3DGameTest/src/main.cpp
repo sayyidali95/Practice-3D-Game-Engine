@@ -39,7 +39,7 @@ int main()
 	
 	Window window(w, "SA Game Test", screenWidth, screenHeight);
 	Window* pWindow = &window;
-	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
+	glClearColor(.8f, 0.8f, 0.8f, 1.0f);
 	
 
 	//Initialize resource managers
@@ -52,7 +52,7 @@ int main()
 	
 	player->transform = glm::translate(player->transform, glm::vec3(0.0f, -3.0f, -3.0f)); // Translate it down a bit so it's at the center of the scene
 	player->transform = glm::scale(player->transform, glm::vec3(0.4f, 0.4f, 0.4f));	// It's a bit too big for our scene, so scale it down
-
+	player2->transform = glm::scale(player->transform, glm::vec3(0.4f, 0.4f, 0.4f));	// It's a bit too big for our scene, so scale it down
 	glm::mat4 projection = glm::perspective(camera.Zoom, (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
 	glm::mat4 view = camera.getViewMatrix();
 
@@ -110,8 +110,10 @@ int main()
 		playerShader.setUniformMat4("model", model);
 
 		doMovement(pWindow, player);
+		lightPos = camera.Position;
+		entityThinkAll();
+		entityTouchAll();
 		entityUpdateAll();
-		//player2->update();
 		entityDrawAll(playerShader);
 		
 		entityGetCount();
