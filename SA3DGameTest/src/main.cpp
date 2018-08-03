@@ -28,7 +28,7 @@ const GLuint screenWidth = 960, screenHeight = 540;
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 // Deltatime
-GLfloat deltaTime = 0.0f;	// Time between current frame and last frame
+GLfloat deltaTime = 1.0f/60.0f;	// Time between current frame and last frame
 GLfloat lastFrame = 0.0f;  	// Time of last frame
 
 // lighting
@@ -108,7 +108,7 @@ int main()
 		model = glm::translate(model , glm::vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
 		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
 		playerShader.setUniformMat4("model", model);
-
+		camera.Position =  player->position - glm::vec3(0.0f, -1.2f, -4.0f);
 		doMovement(pWindow, player);
 		lightPos = camera.Position;
 		entityThinkAll();
@@ -117,24 +117,25 @@ int main()
 		entityDrawAll(playerShader);
 		
 		entityGetCount();
+		cout << player->position.z  << endl;
 		//cout << player->refID << endl;
 		//cout << player2->refID << endl;
 		//playerShader.disable();
 		
 		//camera movement
 		// Camera controls
-		if (pWindow->m_Keys[GLFW_KEY_UP])
+		/*if (pWindow->m_Keys[GLFW_KEY_UP])
 			camera.ProcessKeyboard(FORWARD, deltaTime);
 		if (pWindow->m_Keys[GLFW_KEY_DOWN])
 			camera.ProcessKeyboard(BACKWARD, deltaTime);
 		if (pWindow->m_Keys[GLFW_KEY_LEFT])
 			camera.ProcessKeyboard(LEFT, deltaTime);
 		if (pWindow->m_Keys[GLFW_KEY_RIGHT])
-			camera.ProcessKeyboard(RIGHT, deltaTime);
-		if (pWindow->m_Keys[GLFW_KEY_W])
+			camera.ProcessKeyboard(RIGHT, deltaTime);*/
+		/*if (pWindow->m_Keys[GLFW_KEY_W])
 			camera.ProcessKeyboard(UP, deltaTime);
 		if (pWindow->m_Keys[GLFW_KEY_S])
-			camera.ProcessKeyboard(DOWN, deltaTime);
+			camera.ProcessKeyboard(DOWN, deltaTime);*/
 
 
 		//cameraMovement(pWindow, camera, deltaTime);

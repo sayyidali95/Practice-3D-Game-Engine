@@ -4,25 +4,5 @@ d:\users\sayyid\3dprojects\include\assimp\matrix3x3.h : warning C4819: The file 
 d:\users\sayyid\3dprojects\include\assimp\matrix3x3.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix4x4.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\main.cpp(78): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-  entityManager.cpp
-d:\users\sayyid\3dprojects\include\assimp\defs.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
-d:\users\sayyid\3dprojects\include\assimp\matrix3x3.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
-d:\users\sayyid\3dprojects\include\assimp\matrix3x3.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
-d:\users\sayyid\3dprojects\include\assimp\matrix4x4.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
-d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\entitymanager.cpp(63): warning C4018: '<': signed/unsigned mismatch
-  entity.cpp
-d:\users\sayyid\3dprojects\include\assimp\defs.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
-d:\users\sayyid\3dprojects\include\assimp\matrix3x3.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
-d:\users\sayyid\3dprojects\include\assimp\matrix3x3.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
-d:\users\sayyid\3dprojects\include\assimp\matrix4x4.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
-  Generating Code...
-d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\entitymanager.cpp(39): warning C4715: 'sa3d::EntityManager::Get': not all control paths return a value
-  Compiling...
-  player.cpp
-d:\users\sayyid\3dprojects\include\assimp\defs.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
-d:\users\sayyid\3dprojects\include\assimp\matrix3x3.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
-d:\users\sayyid\3dprojects\include\assimp\matrix3x3.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
-d:\users\sayyid\3dprojects\include\assimp\matrix4x4.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
-  Generating Code...
   SA3DGameTest.vcxproj -> D:\Users\Sayyid\3DProjects\SA3DGameTest\Debug\SA3DGameTest.exe
   SA3DGameTest.vcxproj -> D:\Users\Sayyid\3DProjects\SA3DGameTest\Debug\SA3DGameTest.pdb (Partial PDB)

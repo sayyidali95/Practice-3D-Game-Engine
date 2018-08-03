@@ -33,6 +33,7 @@ namespace graphics {
 
 #define MAX_KEYS		1024
 #define MAX_BUTTONS		32
+#define DELTA_TIME		1.0f/60.0f
 
 
 
