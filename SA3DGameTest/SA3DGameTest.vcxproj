@@ -126,7 +126,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\include;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\src;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\shaders;$(SourcePath);D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\models;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\include;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\src;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\shaders;$(SourcePath);D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\models;D:\Users\Sayyid\3DProjects\bullet3-2.87-binaries\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>

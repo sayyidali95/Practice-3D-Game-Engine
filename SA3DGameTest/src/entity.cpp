@@ -148,7 +148,7 @@ namespace sa3d {
 			free();
 			return;
 		}
-
+		position = glm::vec3(transform[3]);
 
 	}
 
