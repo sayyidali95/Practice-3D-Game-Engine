@@ -58,12 +58,25 @@
     <None Include="shaders\coordinates.vs" />
     <None Include="shaders\lamp.fs" />
     <None Include="shaders\lamp.vs" />
+    <None Include="shaders\outline.fs" />
+    <None Include="shaders\outline.vs" />
     <None Include="shaders\playerModel.fs" />
     <None Include="shaders\playerModel.vs" />
     <None Include="shaders\lightCasters.fs" />
     <None Include="shaders\lightCasters.vs" />
     <None Include="shaders\texture.fs" />
     <None Include="shaders\texture.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\bullet3-2.87-binaries\src\Bullet3Collision\Bullet3Collision.vcxproj">
+      <Project>{6055e79e-444a-379b-823a-cc517be16d05}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\bullet3-2.87-binaries\src\Bullet3Dynamics\Bullet3Dynamics.vcxproj">
+      <Project>{86f89aca-b9b3-3ec8-a1fa-d5839ef48fbb}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\bullet3-2.87-binaries\src\LinearMath\LinearMath.vcxproj">
+      <Project>{913af9d7-097b-31c1-a740-6c24ebbdd876}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -121,12 +134,16 @@
     <LibraryPath>D:\Users\Sayyid\3DProjects\lib;$(LibraryPath)</LibraryPath>
     <SourcePath>D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\include;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\src;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\shaders;D:\Users\Sayyid\3DProjects\models;$(SourcePath)</SourcePath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>D:\Users\Sayyid\3DProjects\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Users\Sayyid\3DProjects\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\include;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\src;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\shaders;$(SourcePath);D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\models;D:\Users\Sayyid\3DProjects\bullet3-2.87-binaries\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Users\Sayyid\3DProjects\bullet3-2.87\src;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\include;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\src;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\shaders;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\models;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -147,10 +164,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>D:\Users\Sayyid\3DProjects\bullet3-2.87\src;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\include;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\src;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\shaders;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\models;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

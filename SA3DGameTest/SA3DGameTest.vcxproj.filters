@@ -142,5 +142,11 @@
     <None Include="shaders\lightCasters.fs">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="shaders\outline.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\outline.fs">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

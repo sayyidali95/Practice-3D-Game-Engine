@@ -11,6 +11,7 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
+
 #define MAX_ENTITIES 2048
 
 namespace sa3d {

@@ -13,6 +13,7 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include <glm/gtc/type_ptr.hpp>
+#include "btBulletDynamicsCommon.h"
 
 
 using namespace sa3d;
@@ -39,9 +40,9 @@ int main()
 	
 	Window window(w, "SA Game Test", screenWidth, screenHeight);
 	Window* pWindow = &window;
-	glClearColor(.8f, 0.8f, 0.8f, 1.0f);
+	glClearColor(0.8f, 0.8f, 0.0f, 1.0f);
 	
-
+	//btBoxShape* box = new btBoxShape(btVector3(1, 1, 1));
 	//Initialize resource managers
 
 
@@ -59,8 +60,7 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 	//Load shaders
 	Shader playerShader("shaders/playerModel.vs", "shaders/playerModel.fs");
-	Shader ourShader("shaders/coordinates.vs", "shaders/coordinates.fs");
-	Shader lightingShader("shaders/basic_lighting.vs", "shaders/basic_lighting.fs");
+	//Shader outlineShader("shaders/outline.vs", "shaders/outline.fs");
 	Shader lampShader("shaders/lamp.vs", "shaders/lamp.fs");
 	//render model
 	player2->obj = new Model("models/nanosuit.obj");
@@ -99,11 +99,6 @@ int main()
 		playerShader.setUniformMat4("model", model);
 
 
-		//load player model
-		//playerShader.enable();
-		playerShader.setUniformMat4("projection", projection);
-		playerShader.setUniformMat4("view", view);
-
 		
 		model = glm::translate(model , glm::vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
 		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
@@ -116,8 +111,16 @@ int main()
 		entityUpdateAll();
 		entityDrawAll(playerShader);
 		
-		entityGetCount();
-		cout << player->position.z  << endl;
+		
+		//outlineShader.enable();
+		//outlineShader.setUniformMat4("projection", projection);
+		//outlineShader.setUniformMat4("view", view);
+
+		//// world transformation
+		//outlineShader.setUniformMat4("model", model);
+		//entityDrawAll(outlineShader);
+		//entityGetCount();
+		//cout << player->position.z  << endl;
 		//cout << player->refID << endl;
 		//cout << player2->refID << endl;
 		//playerShader.disable();

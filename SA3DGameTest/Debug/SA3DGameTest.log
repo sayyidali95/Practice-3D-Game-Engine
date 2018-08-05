@@ -1,7 +1,17 @@
-﻿  entity.cpp
+﻿  player.cpp
 d:\users\sayyid\3dprojects\include\assimp\defs.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix3x3.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix3x3.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix4x4.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
+  main.cpp
+d:\users\sayyid\3dprojects\include\assimp\defs.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
+d:\users\sayyid\3dprojects\include\assimp\matrix3x3.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
+d:\users\sayyid\3dprojects\include\assimp\matrix3x3.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
+d:\users\sayyid\3dprojects\include\assimp\matrix4x4.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
+d:\users\sayyid\3dprojects\bullet3-2.87\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+d:\users\sayyid\3dprojects\bullet3-2.87\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+d:\users\sayyid\3dprojects\bullet3-2.87\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\main.cpp(78): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+  Generating Code...
   SA3DGameTest.vcxproj -> D:\Users\Sayyid\3DProjects\SA3DGameTest\Debug\SA3DGameTest.exe
   SA3DGameTest.vcxproj -> D:\Users\Sayyid\3DProjects\SA3DGameTest\Debug\SA3DGameTest.pdb (Partial PDB)
