@@ -48,8 +48,8 @@ int main()
 
 
 	//initialize player
-	Entity* player = new Player();
-	Entity* player2 = new Entity();
+	Player* player = new Player();
+	Projectile* player2 = new Projectile();
 	
 	player->transform = glm::translate(player->transform, glm::vec3(0.0f, -3.0f, -3.0f)); // Translate it down a bit so it's at the center of the scene
 	player->transform = glm::scale(player->transform, glm::vec3(0.4f, 0.4f, 0.4f));	// It's a bit too big for our scene, so scale it down
@@ -63,7 +63,7 @@ int main()
 	//Shader outlineShader("shaders/outline.vs", "shaders/outline.fs");
 	Shader lampShader("shaders/lamp.vs", "shaders/lamp.fs");
 	//render model
-	player2->obj = new Model("models/nanosuit.obj");
+	//player2->obj = new Model("models/nanosuit.obj");
 	
 	
 
@@ -105,6 +105,10 @@ int main()
 		playerShader.setUniformMat4("model", model);
 		camera.Position =  player->position - glm::vec3(0.0f, -1.2f, -4.0f);
 		doMovement(pWindow, player);
+		if (pWindow->m_Keys[GLFW_KEY_SPACE])
+		{
+			new Projectile();
+		}
 		lightPos = camera.Position;
 		entityThinkAll();
 		entityTouchAll();
@@ -119,7 +123,7 @@ int main()
 		//// world transformation
 		//outlineShader.setUniformMat4("model", model);
 		//entityDrawAll(outlineShader);
-		//entityGetCount();
+		entityGetCount();
 		//cout << player->position.z  << endl;
 		//cout << player->refID << endl;
 		//cout << player2->refID << endl;

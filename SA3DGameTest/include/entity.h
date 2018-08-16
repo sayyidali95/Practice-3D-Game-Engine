@@ -58,7 +58,26 @@ namespace sa3d {
 
 
 	};
-	Entity *entity_new();
+
+
+	/**
+	@brief Projectile Class to handle player interaction*/
+	class Projectile : public Entity {
+
+	public:
+		float lifeTime;
+		float speed;
+
+		Projectile();
+
+		void update();
+
+	};
+
+	/**Entity Spawning functions */
+	Entity* entityInstantiate(glm::vec3 position);
+
+	//Entity *entity_new();
 	//entity Manager
 	void entityManagerInit(int maxEntities);
 	void entityManagerClose();

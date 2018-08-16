@@ -10,7 +10,7 @@ namespace sa3d {
 
 	void Player::update() {
 		//printf("player is alive");
-		position = glm::vec3(transform[3]);
+		//position = glm::vec3(transform[3]);
 	}
 
 	void doMovement(graphics::Window *window, Entity *object)

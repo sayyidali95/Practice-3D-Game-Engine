@@ -182,4 +182,11 @@ namespace sa3d {
 		cout << entityManager->GetEntityCount() << endl;
 	}
 
+	Entity* entityInstantiate(glm::vec3 position)
+	{
+		Entity* self = new Entity();
+		self->position = position;
+		glm::translate(self->transform, self->position);
+		return self;
+	}
 }
