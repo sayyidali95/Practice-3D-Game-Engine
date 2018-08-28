@@ -57,6 +57,10 @@ namespace sa3d {
 			std::vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type,
 				std::string typeName);
 
+			Bone* FindBone(std::string name); // Find bone in bones list
+			aiNode* FindAiNode(std::string name); // find aiNode in model
+			aiNodeAnim* FindAiNodeAnim(std::string name); // find animation node in model
+			int FindBoneIDByName(std::string name);
 		};
 	}
 }

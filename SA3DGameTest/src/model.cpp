@@ -19,7 +19,7 @@ namespace sa3d {
 		{
 			// read file via ASSIMP
 			Assimp::Importer importer;
-			const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
+			const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace | aiProcess_JoinIdenticalVertices);
 			// check for errors
 			if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
 			{
@@ -39,7 +39,67 @@ namespace sa3d {
 			// process ASSIMP's root node recursively
 			processNode(scene->mRootNode, scene);
 
+			for (int i = 0; i < scene->mNumMeshes; i++)
+			{
+				for (int j = 0; j < scene->mMeshes[i]->mNumBones; j++)
+				{
+					//Here we're just storing the bone information that we loaded
+					//with ASSIMP into the formats our Bone class will recognize.
+					std::string b_name = scene->mMeshes[i]->mBones[j]->mName.data;
+					glm::mat4 b_mat = glm::transpose(AiToGLMMat4(scene->mMeshes[i]->mBones[j]->mOffsetMatrix));
+
+					//Just because I like debugging...
+					std::cout << "Bone " << j << " " << b_name << std::endl;
+
+					//Here we create a Bone Object with the information we've
+					//gathered so far, but wait, there's more!
+					Bone bone(&meshes.at(i), i, b_name, b_mat);
+
+					//These next parts are simple, we just fill up the bone's
+					//remaining data using the functions we defined earlier.
+					bone.node = FindAiNode(b_name);
+					bone.animNode = FindAiNodeAnim(b_name);
+
+					if (bone.animNode == nullptr)
+						std::cout << "No Animations were found for " + b_name << std::endl;
+
+					//Finally, we push the Bone into our vector. Yay.
+					bones.push_back(bone);
+				}
+			}
+
+
+			//Now we have to fill up the remaining ... remaining data within the
+			//bone object, specifically: the pointers to the bone's parent bone.
+			for (int i = 0; i < bones.size(); i++)
+			{
+				//Here we cycle through the existing bones and match them up with
+				//their parents, the code here is pretty self explanatory.
+				std::string b_name = bones.at(i).name;
+				std::string parent_name = FindAiNode(b_name)->mParent->mName.data;
+
+				Bone* p_bone = FindBone(parent_name);
+
+				bones.at(i).parentBone = p_bone;
+
+				if (p_bone == nullptr)
+					std::cout << "Parent Bone for " << b_name << " does not exist (is nullptr)" << std::endl;
+			}
+			//I tried combining the above loop with the one above, but this 
+			//only resulted in crashes, and my Just-In-Time debugger isn't working,
+			//so I'll just leave it as is.
+
+			//Here we only need to give the first Mesh in meshes the skeleton data
+			//because in order to initialize the GameObject that will encapsulate this
+			//Mesh, we only need one skeleton. The GameObject will copy the skeleton
+			//of the first Mesh in its meshes vector and use this as its own.
+			//Did that not make sense?
+			//Shit.
+			//It will later on though, so don't worry.
+			if (meshes.size() > 0)
+				meshes->at(0).sceneLoaderSkeleton.Init(bones, globalInverseTransform);
 		}
+		
 		// Processes a node in a recursive fashion. Processes each individual mesh located at the node and repeats this process on its children nodes (if any).
 		void Model::processNode(aiNode* node, const aiScene* scene)
 		{
@@ -229,5 +289,50 @@ namespace sa3d {
 
 			return textureID;
 		}
+
+		Bone* Model::FindBone(std::string name)
+		{
+			for (int i = 0; i < bones.size(); i++)
+			{
+				if (bones.at(i).name == name)
+					return &bones.at(i);
+			}
+			// If bone is not found return null
+			return nullptr;
+		}
+
+		aiNode* Model::FindAiNode(std::string name)
+		{
+			for (int i = 0; i < ai_nodes.size(); i++)
+			{
+				if (ai_nodes.at(i)->mName.data == name)
+					return ai_nodes.at(i);
+			}
+			// find aiNode in list find by processNode()
+			return nullptr;
+		}
+
+		aiNodeAnim* Model::FindAiNodeAnim(std::string name)
+		{
+			for (int i = 0; i < ai_nodes_anim.size(); i++)
+			{
+				if (ai_nodes_anim.at(i)->mNodeName.data == name)
+					return ai_nodes_anim.at(i);
+			}
+			// find aiNodeAnim in animNode list
+			return nullptr;
+		}
+
+		int Model::FindBoneIDByName(std::string name)
+		{
+			for (int i = 0; i < bones.size(); i++)
+			{
+				if (bones.at(i).name == name)
+					return i;
+			}
+			// find bone in bones list by name and return the position
+			return -1;    
+		}
+
 	}
 }
