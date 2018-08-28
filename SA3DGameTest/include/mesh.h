@@ -22,8 +22,11 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
+
+
 namespace sa3d {
 	namespace graphics {
+
 
 
 		/**
@@ -36,6 +39,8 @@ namespace sa3d {
 			glm::vec3 Tangent;
 			glm::vec3 Bitangent;
 		};
+
+		
 
 		/**
 		@brief  Texture class take getting Image path and file type of image file
@@ -56,10 +61,11 @@ namespace sa3d {
 			std::vector<Vertex> vertices;
 			std::vector<GLuint> indices;
 			std::vector<Texture> textures;
+			
 			unsigned int VAO;
 			/*  Functions  */
 			/**Constructor */
-			Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, std::vector<Texture> textures);
+			Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, std::vector<Texture> texture);
 			
 			/** Draw mesh from file*/
 			void Draw(Shader shader);

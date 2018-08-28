@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\bone.cpp" />
     <ClCompile Include="src\buffer.cpp" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\entity.cpp" />
@@ -37,6 +38,7 @@
     <ClCompile Include="src\vertex_array.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\bone.h" />
     <ClInclude Include="include\buffer.h" />
     <ClInclude Include="include\camera.h" />
     <ClInclude Include="include\entity.h" />
@@ -144,7 +146,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\Users\Sayyid\3DProjects\bullet3-2.87\src;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\include;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\src;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\shaders;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\models;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Users\Sayyid\3DProjects\bullet3-2.87\src;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\include;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\src;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\shaders;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\models;D:\Users\Sayyid\3DProjects\model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -165,7 +167,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\Users\Sayyid\3DProjects\bullet3-2.87\src;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\include;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\src;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\shaders;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\models;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Users\Sayyid\3DProjects\bullet3-2.87\src;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\include;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\src;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\shaders;D:\Users\Sayyid\3DProjects\SA3DGameTest\SA3DGameTest\models;D:\Users\Sayyid\3DProjects\model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>

@@ -123,7 +123,7 @@ int main()
 		//// world transformation
 		//outlineShader.setUniformMat4("model", model);
 		//entityDrawAll(outlineShader);
-		entityGetCount();
+		//entityGetCount();
 		//cout << player->position.z  << endl;
 		//cout << player->refID << endl;
 		//cout << player2->refID << endl;

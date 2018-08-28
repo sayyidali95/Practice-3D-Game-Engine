@@ -10,7 +10,7 @@ namespace sa3d {
 			this->vertices = vertices;
 			this->indices = indices;
 			this->textures = textures;
-
+			
 			this->setupMesh();
 		}
 
@@ -84,6 +84,10 @@ namespace sa3d {
 			// vertex bitangent
 			glEnableVertexAttribArray(4);
 			glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, Bitangent));
+
+			//vertex bones
+
+
 
 			glBindVertexArray(0);
 		}

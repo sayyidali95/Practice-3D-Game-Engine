@@ -5,7 +5,7 @@ namespace sa3d {
 
 	Player::Player()
 	{
-		this->obj = new graphics::Model("models/BossModel.obj");
+		this->obj = new graphics::Model("d:/Users/Sayyid/Documents/SA3DFemaleBodyAssets/TanyaV3/TanyaBody2.fbx");
 	};
 
 	void Player::update() {

@@ -19,7 +19,7 @@ namespace sa3d {
 		{
 			// read file via ASSIMP
 			Assimp::Importer importer;
-			const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
+			const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 			// check for errors
 			if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
 			{
@@ -29,12 +29,22 @@ namespace sa3d {
 			// retrieve the directory path of the filepath
 			directory = path.substr(0, path.find_last_of('/'));
 
+			//getAnimations
+			processAnim(scene);
+
+			//get global transform for skeleton
+			aiMatrix4x4 globalInverseTransform = scene->mRootNode->mTransformation;
+			globalInverseTransform.Inverse();
+
 			// process ASSIMP's root node recursively
 			processNode(scene->mRootNode, scene);
+
 		}
 		// Processes a node in a recursive fashion. Processes each individual mesh located at the node and repeats this process on its children nodes (if any).
 		void Model::processNode(aiNode* node, const aiScene* scene)
 		{
+			
+
 			// process each mesh located at the current node
 			for (unsigned int i = 0; i < node->mNumMeshes; i++)
 			{
@@ -51,12 +61,27 @@ namespace sa3d {
 
 		}
 
+		void Model::processAnim(const aiScene* scene) 
+		{
+			if (scene->mAnimations == 0)
+				return;
+			for (int i = 0; i < scene->mAnimations[0]->mNumChannels; i++)
+				ai_nodes_anim.push_back(scene->mAnimations[0]->mChannels[i]);
+
+			//We only get data from the first mAnimation because 
+			//Assimp crushes all of the animation data into one
+			//large sequence of data known as mAnimation.
+			//Assimp does not support multiple mAnimations, surprisingly.
+
+		}
+
 		Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 		{
 			// data to fill
 			vector<Vertex> vertices;
 			vector<unsigned int> indices;
 			vector<Texture> textures;
+
 
 			// Walk through each of the mesh's vertices
 			for (unsigned int i = 0; i < mesh->mNumVertices; i++)

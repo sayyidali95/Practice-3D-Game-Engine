@@ -13,6 +13,7 @@
 #include "shader.h"
 #include "graphics.h"
 #include "mesh.h"
+#include "bone.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
@@ -35,6 +36,8 @@ namespace sa3d {
 			std::string directory;
 			std::vector<Texture> textures_loaded;	// Stores all the textures loaded so far, optimization to make sure textures aren't loaded more than once.
 			bool gammaCorrection;
+			std::vector<Bone> bones;
+
 													/**  Functions   */
 			/**Constructor*/
 			Model(GLchar* path, bool gamma = false);
@@ -42,10 +45,14 @@ namespace sa3d {
 			void Draw(Shader shader);
 			
 
-													/*  Functions   */
 		private:
+			std::vector<aiNode*> ai_nodes;
+			std::vector<aiNodeAnim*> ai_nodes_anim;
+
+													/*  Functions   */
 			void loadModel(string const &path);
 			void processNode(aiNode* node, const aiScene* scene);
+			void processAnim(const aiScene* scene);
 			Mesh processMesh(aiMesh* mesh, const aiScene* scene);
 			std::vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type,
 				std::string typeName);
