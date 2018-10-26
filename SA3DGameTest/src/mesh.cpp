@@ -84,12 +84,19 @@ namespace sa3d {
 			// vertex bitangent
 			glEnableVertexAttribArray(4);
 			glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, Bitangent));
-
-			//vertex bones
+			// Vertex BoneID
+			glEnableVertexAttribArray(5);
+			glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)0);
+			//vertex Weight
+			glEnableVertexAttribArray(6);
+			glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)16);
+			
 
 
 
 			glBindVertexArray(0);
 		}
+
+
 	}
 }

@@ -13,7 +13,7 @@
 #include "shader.h"
 #include "graphics.h"
 #include "mesh.h"
-#include "bone.h"
+#include "skeleton.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
@@ -36,14 +36,19 @@ namespace sa3d {
 			std::string directory;
 			std::vector<Texture> textures_loaded;	// Stores all the textures loaded so far, optimization to make sure textures aren't loaded more than once.
 			bool gammaCorrection;
-			std::vector<Bone> bones;
-
+			std::map<string, int> bones;
+			bool anim = false;
+			//*bone data
+			glm::mat4 globalInverseTransform;
+			glm::mat4 boneTransforms[MAX_BONES];
+			int numBones = 0;
+			
 													/**  Functions   */
 			/**Constructor*/
 			Model(GLchar* path, bool gamma = false);
 
 			void Draw(Shader shader);
-			
+			void UpdateSkeleton();
 
 		private:
 			std::vector<aiNode*> ai_nodes;
@@ -56,11 +61,17 @@ namespace sa3d {
 			Mesh processMesh(aiMesh* mesh, const aiScene* scene);
 			std::vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type,
 				std::string typeName);
-
+			/** LoadBones and bone data into vertices*/
+			void Model::loadBones(unsigned int MeshIndex, const aiMesh* pMesh, vector<int>& Bones);
+			/** Animation time for bone transforms*/
+			glm::mat4 BoneTransform(aiScene* scene, float TimeInSeconds, std::vector<glm::mat4>& Transforms);
+			void Model::ReadNodeHeirarchy(float AnimationTime, aiScene* scene, aiNode* pNode, const glm::mat4 ParentTransform);   /** read and get bone transform from node hierarchy*/
 			Bone* FindBone(std::string name); // Find bone in bones list
 			aiNode* FindAiNode(std::string name); // find aiNode in model
 			aiNodeAnim* FindAiNodeAnim(std::string name); // find animation node in model
 			int FindBoneIDByName(std::string name);
+
+			
 		};
 	}
 }

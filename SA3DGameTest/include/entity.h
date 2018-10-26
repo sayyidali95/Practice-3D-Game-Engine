@@ -36,11 +36,13 @@ namespace sa3d {
 		glm::vec4 color;
 		GLchar* objPath;
 		graphics::Model *obj;
+		
 
 		/**States and other Info */
 		int state;
 		float frame;
 		bool dead;
+		
 		graphics::Texture *texture;
 
 		/**Entity Constructor*/
@@ -55,7 +57,7 @@ namespace sa3d {
 		virtual void think();							/**Updates Entity Behavior*/
 		virtual void touch(Entity* other);				/**Updates interaction between two Entities*/
 		virtual void update();							/** updates Entity State*/
-
+		
 
 	};
 
@@ -77,7 +79,7 @@ namespace sa3d {
 	/**Entity Spawning functions */
 	Entity* entityInstantiate(glm::vec3 position);
 
-	//Entity *entity_new();
+	
 	//entity Manager
 	void entityManagerInit(int maxEntities);
 	void entityManagerClose();

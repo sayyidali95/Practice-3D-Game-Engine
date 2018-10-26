@@ -13,7 +13,7 @@
 #include "shader.h"
 #include "graphics.h"
 #include "stb_image.h"
-
+#include "bone.h"
 
 #include "assimp/Importer.hpp"
 #include "assimp/scene.h"
@@ -22,7 +22,7 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
-
+#define NUM_BONES_PER_VERTEX 4
 
 namespace sa3d {
 	namespace graphics {
@@ -38,9 +38,12 @@ namespace sa3d {
 			glm::vec2 TexCoords;
 			glm::vec3 Tangent;
 			glm::vec3 Bitangent;
+			unsigned int boneIDs[NUM_BONES_PER_VERTEX];
+			float Weights[NUM_BONES_PER_VERTEX];
+			//unsigned int id[4];
 		};
 
-		
+
 
 		/**
 		@brief  Texture class take getting Image path and file type of image file
@@ -61,12 +64,19 @@ namespace sa3d {
 			std::vector<Vertex> vertices;
 			std::vector<GLuint> indices;
 			std::vector<Texture> textures;
-			
+
+
+			//Skeleton *skeleton;
+
 			unsigned int VAO;
 			/*  Functions  */
 			/**Constructor */
 			Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, std::vector<Texture> texture);
 			
+			/**Add bone data to mesh */
+			void AddBoneData(std::vector<Vertex> vertices, unsigned int BoneID, float Weight);
+
+
 			/** Draw mesh from file*/
 			void Draw(Shader shader);
 		private:

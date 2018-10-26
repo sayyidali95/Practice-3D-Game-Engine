@@ -1,4 +1,6 @@
 #pragma once
+#ifndef __BONE_H__
+#define __BONE_H__
 
 
 #include "assimp/Importer.hpp"
@@ -8,7 +10,7 @@
 #include "mesh.h"
 
 #define NUM_BONES_PER_VERTEX 4
-
+#define NUM_WEIGHTS_PER_VERTEX 4
 namespace sa3d {
 	namespace graphics {
 
@@ -19,7 +21,7 @@ namespace sa3d {
 		{
 		public:
 			std::string name;  // Bone Name
-			int id;			// Bone ID
+			unsigned int id;			// Bone ID
 			Mesh* mesh;		// Mesh to Deform
 
 
@@ -76,3 +78,4 @@ namespace sa3d {
 
 	}
 }
+#endif

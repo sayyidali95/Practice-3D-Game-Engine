@@ -3,22 +3,80 @@ d:\users\sayyid\3dprojects\include\assimp\defs.h : warning C4819: The file conta
 d:\users\sayyid\3dprojects\include\assimp\matrix3x3.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix3x3.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix4x4.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C2143: syntax error: missing ';' before '*'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C2238: unexpected token(s) preceding ';'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(39): error C2061: syntax error: identifier 'Mesh'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(39): error C2535: 'sa3d::graphics::Bone::Bone(void)': member function already defined or declared
+  d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(37): note: see declaration of 'sa3d::graphics::Bone::Bone'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(40): error C2061: syntax error: identifier 'Mesh'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(40): error C2535: 'sa3d::graphics::Bone::Bone(void)': member function already defined or declared
+  d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(37): note: see declaration of 'sa3d::graphics::Bone::Bone'
   player.cpp
 d:\users\sayyid\3dprojects\include\assimp\defs.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix3x3.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix3x3.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix4x4.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C2143: syntax error: missing ';' before '*'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C2238: unexpected token(s) preceding ';'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(39): error C2061: syntax error: identifier 'Mesh'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(39): error C2535: 'sa3d::graphics::Bone::Bone(void)': member function already defined or declared
+  d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(37): note: see declaration of 'sa3d::graphics::Bone::Bone'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(40): error C2061: syntax error: identifier 'Mesh'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(40): error C2535: 'sa3d::graphics::Bone::Bone(void)': member function already defined or declared
+  d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(37): note: see declaration of 'sa3d::graphics::Bone::Bone'
   model.cpp
 d:\users\sayyid\3dprojects\include\assimp\defs.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix3x3.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix3x3.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix4x4.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
-d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(68): warning C4018: '<': signed/unsigned mismatch
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C2143: syntax error: missing ';' before '*'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C2238: unexpected token(s) preceding ';'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(39): error C2061: syntax error: identifier 'Mesh'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(39): error C2535: 'sa3d::graphics::Bone::Bone(void)': member function already defined or declared
+  d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(37): note: see declaration of 'sa3d::graphics::Bone::Bone'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(40): error C2061: syntax error: identifier 'Mesh'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(40): error C2535: 'sa3d::graphics::Bone::Bone(void)': member function already defined or declared
+  d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(37): note: see declaration of 'sa3d::graphics::Bone::Bone'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(123): warning C4018: '<': signed/unsigned mismatch
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(298): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(300): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(306): warning C4018: '<': signed/unsigned mismatch
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(325): error C3861: 'CalcInterpolatedScaling': identifier not found
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(331): error C3861: 'CalcInterpolatedRotation': identifier not found
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(336): error C3861: 'CalcInterpolatedPosition': identifier not found
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(362): warning C4018: '<': signed/unsigned mismatch
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(373): warning C4018: '<': signed/unsigned mismatch
+  mesh.cpp
+d:\users\sayyid\3dprojects\include\assimp\defs.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
+d:\users\sayyid\3dprojects\include\assimp\matrix3x3.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
+d:\users\sayyid\3dprojects\include\assimp\matrix3x3.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
+d:\users\sayyid\3dprojects\include\assimp\matrix4x4.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C2143: syntax error: missing ';' before '*'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C2238: unexpected token(s) preceding ';'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(39): error C2061: syntax error: identifier 'Mesh'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(39): error C2535: 'sa3d::graphics::Bone::Bone(void)': member function already defined or declared
+  d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(37): note: see declaration of 'sa3d::graphics::Bone::Bone'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(40): error C2061: syntax error: identifier 'Mesh'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(40): error C2535: 'sa3d::graphics::Bone::Bone(void)': member function already defined or declared
+  d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(37): note: see declaration of 'sa3d::graphics::Bone::Bone'
   main.cpp
 d:\users\sayyid\3dprojects\include\assimp\defs.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix3x3.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix3x3.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix4x4.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C2143: syntax error: missing ';' before '*'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C2238: unexpected token(s) preceding ';'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(39): error C2061: syntax error: identifier 'Mesh'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(39): error C2535: 'sa3d::graphics::Bone::Bone(void)': member function already defined or declared
+  d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(37): note: see declaration of 'sa3d::graphics::Bone::Bone'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(40): error C2061: syntax error: identifier 'Mesh'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(40): error C2535: 'sa3d::graphics::Bone::Bone(void)': member function already defined or declared
+  d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(37): note: see declaration of 'sa3d::graphics::Bone::Bone'
 d:\users\sayyid\3dprojects\bullet3-2.87\src\linearmath\btidebugdraw.h(169): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 d:\users\sayyid\3dprojects\bullet3-2.87\src\linearmath\btidebugdraw.h(170): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
 d:\users\sayyid\3dprojects\bullet3-2.87\src\linearmath\btidebugdraw.h(171): warning C4305: 'argument': truncation from 'double' to 'const btScalar'
@@ -28,14 +86,28 @@ d:\users\sayyid\3dprojects\include\assimp\defs.h : warning C4819: The file conta
 d:\users\sayyid\3dprojects\include\assimp\matrix3x3.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix3x3.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix4x4.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C2143: syntax error: missing ';' before '*'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C2238: unexpected token(s) preceding ';'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(39): error C2061: syntax error: identifier 'Mesh'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(39): error C2535: 'sa3d::graphics::Bone::Bone(void)': member function already defined or declared
+  d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(37): note: see declaration of 'sa3d::graphics::Bone::Bone'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(40): error C2061: syntax error: identifier 'Mesh'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(40): error C2535: 'sa3d::graphics::Bone::Bone(void)': member function already defined or declared
+  d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(37): note: see declaration of 'sa3d::graphics::Bone::Bone'
 d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\entitymanager.cpp(63): warning C4018: '<': signed/unsigned mismatch
   entity.cpp
 d:\users\sayyid\3dprojects\include\assimp\defs.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix3x3.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix3x3.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix4x4.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C2143: syntax error: missing ';' before '*'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(25): error C2238: unexpected token(s) preceding ';'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(39): error C2061: syntax error: identifier 'Mesh'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(39): error C2535: 'sa3d::graphics::Bone::Bone(void)': member function already defined or declared
+  d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(37): note: see declaration of 'sa3d::graphics::Bone::Bone'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(40): error C2061: syntax error: identifier 'Mesh'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(40): error C2535: 'sa3d::graphics::Bone::Bone(void)': member function already defined or declared
+  d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\include\bone.h(37): note: see declaration of 'sa3d::graphics::Bone::Bone'
   Generating Code...
-d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\entitymanager.cpp(39): warning C4715: 'sa3d::EntityManager::Get': not all control paths return a value
-  glad.c
-  SA3DGameTest.vcxproj -> D:\Users\Sayyid\3DProjects\SA3DGameTest\Debug\SA3DGameTest.exe
-  SA3DGameTest.vcxproj -> D:\Users\Sayyid\3DProjects\SA3DGameTest\Debug\SA3DGameTest.pdb (Partial PDB)

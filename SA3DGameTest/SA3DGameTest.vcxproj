@@ -34,6 +34,7 @@
     <ClCompile Include="src\projectile.cpp" />
     <ClCompile Include="src\shader.cpp" />
     <ClCompile Include="src\shapes.cpp" />
+    <ClCompile Include="src\skeleton.cpp" />
     <ClCompile Include="src\stb_image.cpp" />
     <ClCompile Include="src\vertex_array.cpp" />
   </ItemGroup>
@@ -50,6 +51,7 @@
     <ClInclude Include="include\player.h" />
     <ClInclude Include="include\shader.h" />
     <ClInclude Include="include\shapes.h" />
+    <ClInclude Include="include\skeleton.h" />
     <ClInclude Include="include\vertex_array.h" />
   </ItemGroup>
   <ItemGroup>

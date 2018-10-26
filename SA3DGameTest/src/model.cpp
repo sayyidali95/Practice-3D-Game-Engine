@@ -11,6 +11,11 @@ namespace sa3d {
 		// Draws the model, and thus all its meshes
 		void Model::Draw(Shader shader)
 		{
+			if (anim)
+			{
+				UpdateSkeleton();
+			}
+
 			for (GLuint i = 0; i < this->meshes.size(); i++)
 				this->meshes[i].Draw(shader);
 		}
@@ -28,76 +33,66 @@ namespace sa3d {
 			}
 			// retrieve the directory path of the filepath
 			directory = path.substr(0, path.find_last_of('/'));
-
+			glBindVertexArray(0);
 			//getAnimations
 			processAnim(scene);
 
 			//get global transform for skeleton
-			aiMatrix4x4 globalInverseTransform = scene->mRootNode->mTransformation;
-			globalInverseTransform.Inverse();
+			aiMatrix4x4 GlobalInverseTransform = scene->mRootNode->mTransformation;
+			GlobalInverseTransform.Inverse();
+
+			globalInverseTransform = AiToGLMMat4(GlobalInverseTransform);
 
 			// process ASSIMP's root node recursively
 			processNode(scene->mRootNode, scene);
 
-			for (int i = 0; i < scene->mNumMeshes; i++)
+			
+
+
+			
+		}
+
+		void Model::loadBones(unsigned int MeshIndex, const aiMesh* pMesh, vector<int>& Bones)
+		{
+			//load bones into bone map in mesh class
+			numBones = 0;
+			for (unsigned int i = 0; i < pMesh->mNumBones; i++)
 			{
-				for (int j = 0; j < scene->mMeshes[i]->mNumBones; j++)
-				{
-					//Here we're just storing the bone information that we loaded
-					//with ASSIMP into the formats our Bone class will recognize.
-					std::string b_name = scene->mMeshes[i]->mBones[j]->mName.data;
-					glm::mat4 b_mat = glm::transpose(AiToGLMMat4(scene->mMeshes[i]->mBones[j]->mOffsetMatrix));
+				unsigned int BoneIndex = 0;
+				string BoneName(pMesh->mBones[i]->mName.data);
 
-					//Just because I like debugging...
-					std::cout << "Bone " << j << " " << b_name << std::endl;
+				//add bone if not in map
+				if (bones.find(BoneName) == bones.end()) {
+					BoneIndex = numBones;
+					numBones++;
+					
+					this->bones.insert({ BoneName, BoneIndex });
+				}
+				else {
+					BoneIndex = bones[BoneName];
+				}
+				//
+				
+				bones[BoneName] = BoneIndex;
+				aiMatrix4x4 BoneOffset = pMesh->mBones[i]->mOffsetMatrix;
+				boneTransforms[BoneIndex] = AiToGLMMat4(BoneOffset);
+				//check if vertex is affected by bone weights
+				for (unsigned int j = 0; j < pMesh->mBones[i]->mNumWeights; j++) {
+					unsigned int VertexID = pMesh->mBones[i]->mWeights[j].mVertexId;
+					float Weight = pMesh->mBones[i]->mWeights[j].mWeight;
 
-					//Here we create a Bone Object with the information we've
-					//gathered so far, but wait, there's more!
-					Bone bone(&meshes.at(i), i, b_name, b_mat);
-
-					//These next parts are simple, we just fill up the bone's
-					//remaining data using the functions we defined earlier.
-					bone.node = FindAiNode(b_name);
-					bone.animNode = FindAiNodeAnim(b_name);
-
-					if (bone.animNode == nullptr)
-						std::cout << "No Animations were found for " + b_name << std::endl;
-
-					//Finally, we push the Bone into our vector. Yay.
-					bones.push_back(bone);
+					//add boneID and Weight
+					meshes[i].vertices[VertexID].Weights[j] = Weight;
+					for (unsigned int k; k < NUM_BONES_PER_VERTEX; k++)
+					{
+						if (meshes[i].vertices[VertexID].boneIDs[k] != NULL || BoneIndex == 0 )
+						{
+							meshes[i].vertices[VertexID].boneIDs[k] = BoneIndex;
+							break;
+						}
+					}
 				}
 			}
-
-
-			//Now we have to fill up the remaining ... remaining data within the
-			//bone object, specifically: the pointers to the bone's parent bone.
-			for (int i = 0; i < bones.size(); i++)
-			{
-				//Here we cycle through the existing bones and match them up with
-				//their parents, the code here is pretty self explanatory.
-				std::string b_name = bones.at(i).name;
-				std::string parent_name = FindAiNode(b_name)->mParent->mName.data;
-
-				Bone* p_bone = FindBone(parent_name);
-
-				bones.at(i).parentBone = p_bone;
-
-				if (p_bone == nullptr)
-					std::cout << "Parent Bone for " << b_name << " does not exist (is nullptr)" << std::endl;
-			}
-			//I tried combining the above loop with the one above, but this 
-			//only resulted in crashes, and my Just-In-Time debugger isn't working,
-			//so I'll just leave it as is.
-
-			//Here we only need to give the first Mesh in meshes the skeleton data
-			//because in order to initialize the GameObject that will encapsulate this
-			//Mesh, we only need one skeleton. The GameObject will copy the skeleton
-			//of the first Mesh in its meshes vector and use this as its own.
-			//Did that not make sense?
-			//Shit.
-			//It will later on though, so don't worry.
-			if (meshes.size() > 0)
-				meshes->at(0).sceneLoaderSkeleton.Init(bones, globalInverseTransform);
 		}
 		
 		// Processes a node in a recursive fashion. Processes each individual mesh located at the node and repeats this process on its children nodes (if any).
@@ -142,6 +137,7 @@ namespace sa3d {
 			vector<unsigned int> indices;
 			vector<Texture> textures;
 
+			
 
 			// Walk through each of the mesh's vertices
 			for (unsigned int i = 0; i < mesh->mNumVertices; i++)
@@ -181,6 +177,9 @@ namespace sa3d {
 				vector.z = mesh->mBitangents[i].z;
 				vertex.Bitangent = vector;
 				vertices.push_back(vertex);
+				
+
+				
 			}
 			// now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
 			for (unsigned int i = 0; i < mesh->mNumFaces; i++)
@@ -290,17 +289,74 @@ namespace sa3d {
 			return textureID;
 		}
 
-		Bone* Model::FindBone(std::string name)
+		glm::mat4 Model::BoneTransform(aiScene* scene, float TimeInSeconds, std::vector<glm::mat4>& Transforms)
 		{
-			for (int i = 0; i < bones.size(); i++)
-			{
-				if (bones.at(i).name == name)
-					return &bones.at(i);
+			glm::mat4 identity = glm::mat4();
+
+
+			float TicksPerSecond = scene->mAnimations[0]->mTicksPerSecond != 0 ?
+				scene->mAnimations[0]->mTicksPerSecond : 25.0f;
+			float TimeInTicks = TimeInSeconds * TicksPerSecond;
+			float AnimationTime = fmod(TimeInTicks, scene->mAnimations[0]->mDuration);
+
+			ReadNodeHeirarchy(AnimationTime, scene, scene->mRootNode, identity);
+
+			Transforms.resize(numBones);
+
+			for (unsigned int i = 0; i < numBones; i++) {
+				Transforms[i] = boneTransforms[i];
+
 			}
-			// If bone is not found return null
-			return nullptr;
 		}
 
+		void Model::ReadNodeHeirarchy(float AnimationTime, aiScene* scene,  aiNode* pNode, const glm::mat4 ParentTransform)
+		{
+			string nodeName(pNode->mName.data);
+
+			const aiAnimation* animation = scene->mAnimations[0];
+
+			glm::mat4 nodeTransformation = AiToGLMMat4(pNode->mTransformation);
+			
+			const aiNodeAnim* nodeAnim = FindAiNodeAnim(nodeName);
+			if (animation)
+			{
+				//Interpolate scaling between frames and generate matrices
+				aiVector3D scaling;
+				CalcInterpolatedScaling(scaling, AnimationTime, nodeAnim);
+				glm::mat4 scaleMatrix;
+				scaleMatrix = glm::scale(scaleMatrix, glm::vec3(scaling.x, scaling.y, scaling.z));
+
+				//Interpolate rotation between frames and generate matrices
+				aiQuaternion rotation;
+				CalcInterpolatedRotation(rotation, AnimationTime, nodeAnim);
+				glm::mat4 rotationMatrix = glm::mat4(AiToGLMMat4(aiMatrix4x4(rotation.GetMatrix())));
+
+				//Interpolate translation between frames and generate matrices
+				aiVector3D translation;
+				CalcInterpolatedPosition(translation, AnimationTime, nodeAnim);
+				glm::mat4 translationMatrix = glm::translate(translationMatrix,
+					glm::vec3(translation.x, translation.y, translation.z));
+			
+				//combine transformations
+				nodeTransformation = translationMatrix * rotationMatrix * scaleMatrix;
+
+
+			}
+
+			glm::mat4 globalTransform = ParentTransform * nodeTransformation;
+
+			if (bones.find(nodeName) != bones.end())
+			{
+				unsigned int boneIndex = bones[nodeName];
+				boneTransforms[boneIndex] = globalInverseTransform * globalTransform * boneTransforms[boneIndex];
+
+			}
+
+			for (unsigned int i = 0; i < pNode->mNumChildren; i++)
+			{
+				ReadNodeHeirarchy(AnimationTime, scene, pNode->mChildren[i], globalTransform);
+			}
+		}
 		aiNode* Model::FindAiNode(std::string name)
 		{
 			for (int i = 0; i < ai_nodes.size(); i++)
@@ -323,16 +379,6 @@ namespace sa3d {
 			return nullptr;
 		}
 
-		int Model::FindBoneIDByName(std::string name)
-		{
-			for (int i = 0; i < bones.size(); i++)
-			{
-				if (bones.at(i).name == name)
-					return i;
-			}
-			// find bone in bones list by name and return the position
-			return -1;    
-		}
 
 	}
 }
