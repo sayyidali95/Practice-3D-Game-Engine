@@ -65,11 +65,19 @@ namespace sa3d {
 			void Model::loadBones(unsigned int MeshIndex, const aiMesh* pMesh, vector<int>& Bones);
 			/** Animation time for bone transforms*/
 			glm::mat4 BoneTransform(aiScene* scene, float TimeInSeconds, std::vector<glm::mat4>& Transforms);
-			void Model::ReadNodeHeirarchy(float AnimationTime, aiScene* scene, aiNode* pNode, const glm::mat4 ParentTransform);   /** read and get bone transform from node hierarchy*/
+			void ReadNodeHeirarchy(float AnimationTime, aiScene* scene, aiNode* pNode, const glm::mat4 ParentTransform);   /** read and get bone transform from node hierarchy*/
+			
+			void CalcInterpolatedScale(aiVector3D Out, float AnimationTime, const aiNodeAnim * pNodeAnim);
+			void CalcInterpolatedPosition(aiVector3D Out, float AnimationTime, const aiNodeAnim * pNodeAnim);
+			void CalcInterpolatedRotation(aiQuaternion& Out, float AnimationTime, const aiNodeAnim * pNodeAnim);
+			
+			unsigned int FindScale(float AnimationTime, const aiNodeAnim* pNodeAnim);
+			unsigned int FindPosition(float AnimationTime, const aiNodeAnim* pNodeAnim);
+			unsigned int FindRotation(float AnimationTime, const aiNodeAnim* pNodeAnim);
 			Bone* FindBone(std::string name); // Find bone in bones list
 			aiNode* FindAiNode(std::string name); // find aiNode in model
 			aiNodeAnim* FindAiNodeAnim(std::string name); // find animation node in model
-			int FindBoneIDByName(std::string name);
+
 
 			
 		};

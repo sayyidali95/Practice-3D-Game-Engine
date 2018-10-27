@@ -55,6 +55,7 @@
     <ClInclude Include="include\vertex_array.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="shaders\animatedModel.vs" />
     <None Include="shaders\basic_lighting.fs" />
     <None Include="shaders\basic_lighting.vs" />
     <None Include="shaders\color.fs" />

@@ -44,11 +44,19 @@ d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(123): warning
 d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(298): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(300): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(306): warning C4018: '<': signed/unsigned mismatch
-d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(325): error C3861: 'CalcInterpolatedScaling': identifier not found
-d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(331): error C3861: 'CalcInterpolatedRotation': identifier not found
-d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(336): error C3861: 'CalcInterpolatedPosition': identifier not found
-d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(362): warning C4018: '<': signed/unsigned mismatch
-d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(373): warning C4018: '<': signed/unsigned mismatch
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(374): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(379): error C3867: 'aiVector3t<float>::Normalize': non-standard syntax; use '&' to create a pointer to member
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(379): error C2679: binary '=': no operator found which takes a right-hand operand of type 'overloaded-function' (or there is no acceptable conversion)
+  d:\users\sayyid\3dprojects\include\assimp\vector3.h(129): note: could be 'aiVector3t<float> &aiVector3t<float>::operator =(const aiVector3t<float> &)'
+  d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(379): note: while trying to match the argument list '(aiVector3D, overloaded-function)'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(392): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(397): error C3867: 'aiVector3t<float>::Normalize': non-standard syntax; use '&' to create a pointer to member
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(397): error C2679: binary '=': no operator found which takes a right-hand operand of type 'overloaded-function' (or there is no acceptable conversion)
+  d:\users\sayyid\3dprojects\include\assimp\vector3.h(129): note: could be 'aiVector3t<float> &aiVector3t<float>::operator =(const aiVector3t<float> &)'
+  d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(397): note: while trying to match the argument list '(aiVector3D, overloaded-function)'
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(411): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(461): warning C4018: '<': signed/unsigned mismatch
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(472): warning C4018: '<': signed/unsigned mismatch
   mesh.cpp
 d:\users\sayyid\3dprojects\include\assimp\defs.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
 d:\users\sayyid\3dprojects\include\assimp\matrix3x3.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss

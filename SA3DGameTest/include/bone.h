@@ -20,26 +20,26 @@ namespace sa3d {
 		class Bone
 		{
 		public:
-			std::string name;  // Bone Name
-			unsigned int id;			// Bone ID
-			Mesh* mesh;		// Mesh to Deform
+			//std::string name;  // Bone Name
+			//unsigned int id;			// Bone ID
+			//Mesh* mesh;		// Mesh to Deform
 
 
-			aiNode* node; // bone's node to get transformation matrix
-			aiNodeAnim* animNode; // the bone's animation node
+			//aiNode* node; // bone's node to get transformation matrix
+			//aiNodeAnim* animNode; // the bone's animation node
 
-			Bone* parentBone; //parent bone for referencing
-			glm::mat4 parentTransform;
-			glm::mat4 offsetMatrix;	//offset matrix for getting bone transform in world space
+			//Bone* parentBone; //parent bone for referencing
+			//glm::mat4 parentTransform;
+			//glm::mat4 offsetMatrix;	//offset matrix for getting bone transform in world space
 
-			//Skeleton* parentSkeleton; // the parent skeleton
-			
-			Bone() { name = ""; id = -2; }
+			////Skeleton* parentSkeleton; // the parent skeleton
+			//
+			//Bone() { name = ""; id = -2; }
 
-			Bone(Mesh* in_mesh, unsigned int in_id, std::string in_name, aiMatrix4x4 in_o_mat);
-			Bone(Mesh* in_mesh, unsigned int in_id, std::string in_name, glm::mat4 in_o_mat);
+			//Bone(Mesh* in_mesh, unsigned int in_id, std::string in_name, aiMatrix4x4 in_o_mat);
+			//Bone(Mesh* in_mesh, unsigned int in_id, std::string in_name, glm::mat4 in_o_mat);
 
-			glm::mat4 GetParentTransforms();
+			//glm::mat4 GetParentTransforms();
 		};
 
 		static aiMatrix4x4 GLMMat4ToAi(glm::mat4 mat)

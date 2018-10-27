@@ -163,5 +163,8 @@
     <None Include="shaders\outline.fs">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="shaders\animatedModel.vs">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

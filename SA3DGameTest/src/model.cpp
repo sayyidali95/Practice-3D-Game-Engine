@@ -46,10 +46,10 @@ namespace sa3d {
 			// process ASSIMP's root node recursively
 			processNode(scene->mRootNode, scene);
 
-			
 
 
-			
+
+
 		}
 
 		void Model::loadBones(unsigned int MeshIndex, const aiMesh* pMesh, vector<int>& Bones)
@@ -65,14 +65,14 @@ namespace sa3d {
 				if (bones.find(BoneName) == bones.end()) {
 					BoneIndex = numBones;
 					numBones++;
-					
+
 					this->bones.insert({ BoneName, BoneIndex });
 				}
 				else {
 					BoneIndex = bones[BoneName];
 				}
 				//
-				
+
 				bones[BoneName] = BoneIndex;
 				aiMatrix4x4 BoneOffset = pMesh->mBones[i]->mOffsetMatrix;
 				boneTransforms[BoneIndex] = AiToGLMMat4(BoneOffset);
@@ -85,7 +85,7 @@ namespace sa3d {
 					meshes[i].vertices[VertexID].Weights[j] = Weight;
 					for (unsigned int k; k < NUM_BONES_PER_VERTEX; k++)
 					{
-						if (meshes[i].vertices[VertexID].boneIDs[k] != NULL || BoneIndex == 0 )
+						if (meshes[i].vertices[VertexID].boneIDs[k] != NULL || BoneIndex == 0)
 						{
 							meshes[i].vertices[VertexID].boneIDs[k] = BoneIndex;
 							break;
@@ -94,11 +94,11 @@ namespace sa3d {
 				}
 			}
 		}
-		
+
 		// Processes a node in a recursive fashion. Processes each individual mesh located at the node and repeats this process on its children nodes (if any).
 		void Model::processNode(aiNode* node, const aiScene* scene)
 		{
-			
+
 
 			// process each mesh located at the current node
 			for (unsigned int i = 0; i < node->mNumMeshes; i++)
@@ -116,7 +116,7 @@ namespace sa3d {
 
 		}
 
-		void Model::processAnim(const aiScene* scene) 
+		void Model::processAnim(const aiScene* scene)
 		{
 			if (scene->mAnimations == 0)
 				return;
@@ -137,7 +137,7 @@ namespace sa3d {
 			vector<unsigned int> indices;
 			vector<Texture> textures;
 
-			
+
 
 			// Walk through each of the mesh's vertices
 			for (unsigned int i = 0; i < mesh->mNumVertices; i++)
@@ -177,9 +177,9 @@ namespace sa3d {
 				vector.z = mesh->mBitangents[i].z;
 				vertex.Bitangent = vector;
 				vertices.push_back(vertex);
-				
 
-				
+
+
 			}
 			// now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
 			for (unsigned int i = 0; i < mesh->mNumFaces; i++)
@@ -197,7 +197,7 @@ namespace sa3d {
 			// diffuse: texture_diffuseN
 			// specular: texture_specularN
 			// normal: texture_normalN
-			
+
 			// 1. diffuse maps
 			vector<Texture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
 			textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
@@ -309,20 +309,20 @@ namespace sa3d {
 			}
 		}
 
-		void Model::ReadNodeHeirarchy(float AnimationTime, aiScene* scene,  aiNode* pNode, const glm::mat4 ParentTransform)
+		void Model::ReadNodeHeirarchy(float AnimationTime, aiScene* scene, aiNode* pNode, const glm::mat4 ParentTransform)
 		{
 			string nodeName(pNode->mName.data);
 
 			const aiAnimation* animation = scene->mAnimations[0];
 
 			glm::mat4 nodeTransformation = AiToGLMMat4(pNode->mTransformation);
-			
+
 			const aiNodeAnim* nodeAnim = FindAiNodeAnim(nodeName);
 			if (animation)
 			{
 				//Interpolate scaling between frames and generate matrices
 				aiVector3D scaling;
-				CalcInterpolatedScaling(scaling, AnimationTime, nodeAnim);
+				CalcInterpolatedScale(scaling, AnimationTime, nodeAnim);
 				glm::mat4 scaleMatrix;
 				scaleMatrix = glm::scale(scaleMatrix, glm::vec3(scaling.x, scaling.y, scaling.z));
 
@@ -336,12 +336,14 @@ namespace sa3d {
 				CalcInterpolatedPosition(translation, AnimationTime, nodeAnim);
 				glm::mat4 translationMatrix = glm::translate(translationMatrix,
 					glm::vec3(translation.x, translation.y, translation.z));
-			
+
 				//combine transformations
 				nodeTransformation = translationMatrix * rotationMatrix * scaleMatrix;
 
 
 			}
+
+
 
 			glm::mat4 globalTransform = ParentTransform * nodeTransformation;
 
@@ -356,7 +358,104 @@ namespace sa3d {
 			{
 				ReadNodeHeirarchy(AnimationTime, scene, pNode->mChildren[i], globalTransform);
 			}
+
 		}
+		void Model::CalcInterpolatedScale (aiVector3D Out, float AnimationTime, const aiNodeAnim * pNodeAnim)
+		{
+			// we need at least two values to interpolate...
+			if (pNodeAnim->mNumScalingKeys == 1) {
+				Out = pNodeAnim->mScalingKeys[0].mValue;
+				return;
+			}
+
+			unsigned int scaleIndex = FindScale(AnimationTime, pNodeAnim);
+			unsigned int nextScaleIndex = (scaleIndex + 1);
+			assert(nextScaleIndex < pNodeAnim->mNumScalingKeys);
+			float DeltaTime = pNodeAnim->mScalingKeys[nextScaleIndex].mTime - pNodeAnim->mScalingKeys[scaleIndex].mTime;
+			float Factor = (AnimationTime - (float)pNodeAnim->mScalingKeys[scaleIndex].mTime) / DeltaTime;
+			assert(Factor >= 0.0f && Factor <= 1.0f);
+			const aiVector3D startScale = pNodeAnim->mScalingKeys[scaleIndex].mValue;
+			const aiVector3D endScale = pNodeAnim->mScalingKeys[nextScaleIndex].mValue;
+			Out = Out.Normalize;
+		}
+		void Model::CalcInterpolatedPosition(aiVector3D Out, float AnimationTime, const aiNodeAnim * pNodeAnim)
+		{
+			// we need at least two values to interpolate...
+			if (pNodeAnim->mNumPositionKeys == 1) {
+				Out = pNodeAnim->mPositionKeys[0].mValue;
+				return;
+			}
+
+			unsigned int positionIndex = FindPosition(AnimationTime, pNodeAnim);
+			unsigned int nextPositionIndex = (positionIndex + 1);
+			assert(nextPositionIndex < pNodeAnim->mNumPositionKeys);
+			float DeltaTime = pNodeAnim->mScalingKeys[nextPositionIndex].mTime - pNodeAnim->mPositionKeys[positionIndex].mTime;
+			float Factor = (AnimationTime - (float)pNodeAnim->mPositionKeys[positionIndex].mTime) / DeltaTime;
+			assert(Factor >= 0.0f && Factor <= 1.0f);
+			const aiVector3D startPosition = pNodeAnim->mPositionKeys[positionIndex].mValue;
+			const aiVector3D endPosition = pNodeAnim->mPositionKeys[nextPositionIndex].mValue;
+			Out = Out.Normalize;
+		}
+	
+		void Model::CalcInterpolatedRotation(aiQuaternion& Out, float AnimationTime, const aiNodeAnim * pNodeAnim)
+		{
+			// we need at least two values to interpolate...
+			if (pNodeAnim->mNumRotationKeys == 1) {
+				Out = pNodeAnim->mRotationKeys[0].mValue;
+				return;
+			}
+
+			unsigned int RotationIndex = FindRotation(AnimationTime, pNodeAnim);
+			unsigned int NextRotationIndex = (RotationIndex + 1);
+			assert(NextRotationIndex < pNodeAnim->mNumRotationKeys);
+			float DeltaTime = pNodeAnim->mRotationKeys[NextRotationIndex].mTime - pNodeAnim->mRotationKeys[RotationIndex].mTime;
+			float Factor = (AnimationTime - (float)pNodeAnim->mRotationKeys[RotationIndex].mTime) / DeltaTime;
+			assert(Factor >= 0.0f && Factor <= 1.0f);
+			const aiQuaternion& StartRotationQ = pNodeAnim->mRotationKeys[RotationIndex].mValue;
+			const aiQuaternion& EndRotationQ = pNodeAnim->mRotationKeys[NextRotationIndex].mValue;
+			aiQuaternion::Interpolate(Out, StartRotationQ, EndRotationQ, Factor);
+			Out = Out.Normalize();
+		}
+
+		unsigned int Model::FindScale(float AnimationTime, const aiNodeAnim* pNodeAnim)
+		{
+			assert(pNodeAnim->mNumScalingKeys > 0);
+
+			for (unsigned int i = 0; i < pNodeAnim->mNumScalingKeys - 1; i++) {
+				if (AnimationTime < (float)pNodeAnim->mScalingKeys[i + 1].mTime) {
+					return i;
+				}
+			}
+
+			assert(0);
+		}
+
+		unsigned int Model::FindPosition(float AnimationTime, const aiNodeAnim* pNodeAnim)
+		{
+			assert(pNodeAnim->mNumPositionKeys > 0);
+
+			for (unsigned int i = 0; i < pNodeAnim->mNumPositionKeys - 1; i++) {
+				if (AnimationTime < (float)pNodeAnim->mPositionKeys[i + 1].mTime) {
+					return i;
+				}
+			}
+
+			assert(0);
+		}
+
+		unsigned int Model::FindRotation(float AnimationTime, const aiNodeAnim* pNodeAnim)
+		{
+			assert(pNodeAnim->mNumRotationKeys > 0);
+
+			for (unsigned int i = 0; i < pNodeAnim->mNumRotationKeys - 1; i++) {
+				if (AnimationTime < (float)pNodeAnim->mRotationKeys[i + 1].mTime) {
+					return i;
+				}
+			}
+
+			assert(0);
+		}
+
 		aiNode* Model::FindAiNode(std::string name)
 		{
 			for (int i = 0; i < ai_nodes.size(); i++)
