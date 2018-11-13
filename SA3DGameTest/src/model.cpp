@@ -6,6 +6,7 @@ namespace sa3d {
 		Model::Model(GLchar* path, bool gamma) : gammaCorrection(gamma)
 		{
 			this->loadModel(path);
+		
 		}
 
 		// Draws the model, and thus all its meshes
@@ -13,7 +14,7 @@ namespace sa3d {
 		{
 			if (anim)
 			{
-				UpdateSkeleton();
+				//UpdateSkeleton();
 			}
 
 			for (GLuint i = 0; i < this->meshes.size(); i++)
@@ -24,7 +25,7 @@ namespace sa3d {
 		{
 			// read file via ASSIMP
 			Assimp::Importer importer;
-			const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace | aiProcess_JoinIdenticalVertices);
+			scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace | aiProcess_JoinIdenticalVertices | aiProcess_LimitBoneWeights);
 			// check for errors
 			if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
 			{
@@ -35,35 +36,43 @@ namespace sa3d {
 			directory = path.substr(0, path.find_last_of('/'));
 			glBindVertexArray(0);
 			//getAnimations
-			processAnim(scene);
+			//processAnim(scene);
 
 			//get global transform for skeleton
 			aiMatrix4x4 GlobalInverseTransform = scene->mRootNode->mTransformation;
 			GlobalInverseTransform.Inverse();
 
 			globalInverseTransform = AiToGLMMat4(GlobalInverseTransform);
-
+			
+			//cout << scene->mMeshes[0]->mNumBones << endl;
 			// process ASSIMP's root node recursively
 			processNode(scene->mRootNode, scene);
-
+			for (unsigned int i = 0; i < meshes.size(); i++)
+			{
+				
+				loadBones(i, scene->mMeshes[i]);
+			}
 
 
 
 
 		}
 
-		void Model::loadBones(unsigned int MeshIndex, const aiMesh* pMesh, vector<int>& Bones)
+		void Model::loadBones(unsigned int MeshIndex, const aiMesh* pMesh)
 		{
 			//load bones into bone map in mesh class
+			cout << "Loading Bones" << endl;
 			numBones = 0;
+			//cout << pMesh->mNumBones << endl;
 			for (unsigned int i = 0; i < pMesh->mNumBones; i++)
 			{
 				unsigned int BoneIndex = 0;
 				string BoneName(pMesh->mBones[i]->mName.data);
-
+				cout << BoneName.c_str() << endl;
 				//add bone if not in map
 				if (bones.find(BoneName) == bones.end()) {
 					BoneIndex = numBones;
+					
 					numBones++;
 
 					this->bones.insert({ BoneName, BoneIndex });
@@ -77,21 +86,21 @@ namespace sa3d {
 				aiMatrix4x4 BoneOffset = pMesh->mBones[i]->mOffsetMatrix;
 				boneTransforms[BoneIndex] = AiToGLMMat4(BoneOffset);
 				//check if vertex is affected by bone weights
-				for (unsigned int j = 0; j < pMesh->mBones[i]->mNumWeights; j++) {
-					unsigned int VertexID = pMesh->mBones[i]->mWeights[j].mVertexId;
-					float Weight = pMesh->mBones[i]->mWeights[j].mWeight;
+				//for (unsigned int j = 0; j < pMesh->mBones[i]->mNumWeights; j++) {
+				//	unsigned int VertexID = pMesh->mBones[i]->mWeights[j].mVertexId;
+				//	float Weight = pMesh->mBones[i]->mWeights[j].mWeight;
 
-					//add boneID and Weight
-					meshes[i].vertices[VertexID].Weights[j] = Weight;
-					for (unsigned int k; k < NUM_BONES_PER_VERTEX; k++)
-					{
-						if (meshes[i].vertices[VertexID].boneIDs[k] != NULL || BoneIndex == 0)
-						{
-							meshes[i].vertices[VertexID].boneIDs[k] = BoneIndex;
-							break;
-						}
-					}
-				}
+				//	//add boneID and Weight
+				//	meshes[i].vertices[VertexID].Weights[j] = Weight;
+				//	for (unsigned int k = 0; k < NUM_BONES_PER_VERTEX; k++)
+				//	{
+				//		if (meshes[i].vertices[VertexID].boneIDs[k] != NULL || BoneIndex == 0)
+				//		{
+				//			meshes[i].vertices[VertexID].boneIDs[k] = BoneIndex;
+				//			break;
+				//		}
+				//	}
+				//}
 			}
 		}
 
@@ -145,11 +154,13 @@ namespace sa3d {
 				Vertex vertex;
 				glm::vec3 vector; // we declare a placeholder vector since assimp uses its own vector class that doesn't directly convert to glm's vec3 class so we transfer the data to this placeholder glm::vec3 first.
 								  // positions
+
 				vector.x = mesh->mVertices[i].x;
 				vector.y = mesh->mVertices[i].y;
 				vector.z = mesh->mVertices[i].z;
 				vertex.Position = vector;
 				// normals
+				
 				vector.x = mesh->mNormals[i].x;
 				vector.y = mesh->mNormals[i].y;
 				vector.z = mesh->mNormals[i].z;
@@ -289,7 +300,7 @@ namespace sa3d {
 			return textureID;
 		}
 
-		glm::mat4 Model::BoneTransform(aiScene* scene, float TimeInSeconds, std::vector<glm::mat4>& Transforms)
+		std::vector<glm::mat4> Model::BoneTransform(aiScene* scene, float TimeInSeconds, std::vector<glm::mat4>& Transforms)
 		{
 			glm::mat4 identity = glm::mat4();
 
@@ -307,6 +318,9 @@ namespace sa3d {
 				Transforms[i] = boneTransforms[i];
 
 			}
+
+			return Transforms;
+			
 		}
 
 		void Model::ReadNodeHeirarchy(float AnimationTime, aiScene* scene, aiNode* pNode, const glm::mat4 ParentTransform)
@@ -376,7 +390,9 @@ namespace sa3d {
 			assert(Factor >= 0.0f && Factor <= 1.0f);
 			const aiVector3D startScale = pNodeAnim->mScalingKeys[scaleIndex].mValue;
 			const aiVector3D endScale = pNodeAnim->mScalingKeys[nextScaleIndex].mValue;
-			Out = Out.Normalize;
+			// lerp between scales
+			Out = (Factor * startScale) + ((1 - Factor) * endScale);
+			//Out = Out.Normalize();
 		}
 		void Model::CalcInterpolatedPosition(aiVector3D Out, float AnimationTime, const aiNodeAnim * pNodeAnim)
 		{
@@ -394,7 +410,9 @@ namespace sa3d {
 			assert(Factor >= 0.0f && Factor <= 1.0f);
 			const aiVector3D startPosition = pNodeAnim->mPositionKeys[positionIndex].mValue;
 			const aiVector3D endPosition = pNodeAnim->mPositionKeys[nextPositionIndex].mValue;
-			Out = Out.Normalize;
+			//lerp between points
+			Out = (Factor * startPosition) + ((1 - Factor) * endPosition);
+			//Out = Out.Normalize();
 		}
 	
 		void Model::CalcInterpolatedRotation(aiQuaternion& Out, float AnimationTime, const aiNodeAnim * pNodeAnim)

@@ -74,7 +74,7 @@ namespace sa3d {
 			Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, std::vector<Texture> texture);
 			
 			/**Add bone data to mesh */
-			void AddBoneData(std::vector<Vertex> vertices, unsigned int BoneID, float Weight);
+			//void AddBoneData(std::vector<Vertex> vertices, unsigned int BoneID, float Weight);
 
 
 			/** Draw mesh from file*/

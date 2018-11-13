@@ -5,7 +5,7 @@ namespace sa3d {
 
 	Player::Player()
 	{
-		this->obj = new graphics::Model("D:/Users/Sayyid/3DProjects/SA3DGameTest/SA3DGameTest/models/nanosuit.obj");
+		this->obj = new graphics::Model("d:/Users/Sayyid/Documents/SA3DFemaleBodyAssets/Shiinav1/ShiinaV1.dae");
 	};
 
 	void Player::update() {

@@ -52,7 +52,7 @@ int main()
 	Projectile* player2 = new Projectile();
 	
 	player->transform = glm::translate(player->transform, glm::vec3(0.0f, -3.0f, -3.0f)); // Translate it down a bit so it's at the center of the scene
-	player->transform = glm::scale(player->transform, glm::vec3(0.4f, 0.4f, 0.4f));	// It's a bit too big for our scene, so scale it down
+	player->transform = glm::scale(player->transform, glm::vec3(1.0f, 1.0f, 1.0f));	// It's a bit too big for our scene, so scale it down
 	player2->transform = glm::scale(player->transform, glm::vec3(0.4f, 0.4f, 0.4f));	// It's a bit too big for our scene, so scale it down
 	glm::mat4 projection = glm::perspective(camera.Zoom, (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
 	glm::mat4 view = camera.getViewMatrix();
@@ -100,16 +100,16 @@ int main()
 
 
 		
-		model = glm::translate(model , glm::vec3(0.0f, -1.75f, 0.0f)); // translate it down so it's at the center of the scene
-		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// it's a bit too big for our scene, so scale it down
+		model = glm::translate(model , glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
 		playerShader.setUniformMat4("model", model);
-		camera.Position =  player->position - glm::vec3(0.0f, -1.2f, -4.0f);
+		//camera.Position =  player->position - glm::vec3(0.0f, -1.2f, -4.0f);
 		doMovement(pWindow, player);
 		if (pWindow->m_Keys[GLFW_KEY_SPACE])
 		{
 			new Projectile();
 		}
-		lightPos = camera.Position;
+		//lightPos = camera.Position;
 		entityThinkAll();
 		entityTouchAll();
 		entityUpdateAll();

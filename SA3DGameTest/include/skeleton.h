@@ -5,7 +5,7 @@
 
 #include "bone.h"
 
-#define MAX_BONES 108
+#define MAX_BONES 128
 namespace sa3d {
 	namespace graphics {
 

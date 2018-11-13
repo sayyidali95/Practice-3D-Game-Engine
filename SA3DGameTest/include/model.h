@@ -51,6 +51,7 @@ namespace sa3d {
 			void UpdateSkeleton();
 
 		private:
+			const aiScene* scene;
 			std::vector<aiNode*> ai_nodes;
 			std::vector<aiNodeAnim*> ai_nodes_anim;
 
@@ -62,9 +63,9 @@ namespace sa3d {
 			std::vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type,
 				std::string typeName);
 			/** LoadBones and bone data into vertices*/
-			void Model::loadBones(unsigned int MeshIndex, const aiMesh* pMesh, vector<int>& Bones);
+			void Model::loadBones(unsigned int MeshIndex, const aiMesh* pMesh);
 			/** Animation time for bone transforms*/
-			glm::mat4 BoneTransform(aiScene* scene, float TimeInSeconds, std::vector<glm::mat4>& Transforms);
+			std::vector<glm::mat4> BoneTransform(aiScene* scene, float TimeInSeconds, std::vector<glm::mat4>& Transforms);
 			void ReadNodeHeirarchy(float AnimationTime, aiScene* scene, aiNode* pNode, const glm::mat4 ParentTransform);   /** read and get bone transform from node hierarchy*/
 			
 			void CalcInterpolatedScale(aiVector3D Out, float AnimationTime, const aiNodeAnim * pNodeAnim);
