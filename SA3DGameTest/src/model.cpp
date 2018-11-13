@@ -25,9 +25,15 @@ namespace sa3d {
 		{
 			// read file via ASSIMP
 			Assimp::Importer importer;
-			scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace | aiProcess_JoinIdenticalVertices | aiProcess_LimitBoneWeights);
+			scene = importer.ReadFile(path, aiProcess_Triangulate |
+				aiProcess_GenSmoothNormals |
+				aiProcess_FlipUVs |
+				aiProcess_CalcTangentSpace |
+				aiProcess_JoinIdenticalVertices |
+				aiProcess_FindInvalidData |
+				aiProcess_LimitBoneWeights);
 			// check for errors
-			if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
+			if (!scene) // if is Not Zero
 			{
 				cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << endl;
 				return;
@@ -63,46 +69,62 @@ namespace sa3d {
 			//load bones into bone map in mesh class
 			cout << "Loading Bones" << endl;
 			numBones = 0;
-			//cout << pMesh->mNumBones << endl;
+			cout << pMesh->mNumBones << endl;
 			for (unsigned int i = 0; i < pMesh->mNumBones; i++)
 			{
 				unsigned int BoneIndex = 0;
 				string BoneName(pMesh->mBones[i]->mName.data);
-				cout << BoneName.c_str() << endl;
 				//add bone if not in map
 				if (bones.find(BoneName) == bones.end()) {
 					BoneIndex = numBones;
-					
+					cout << BoneName.c_str() << endl;
+					//cout << pMesh->mBones[i]->mNumWeights << endl;
 					numBones++;
 
 					this->bones.insert({ BoneName, BoneIndex });
 				}
 				else {
 					BoneIndex = bones[BoneName];
+					cout << BoneIndex << "of " << numBones << endl;
 				}
 				//
 
 				bones[BoneName] = BoneIndex;
 				aiMatrix4x4 BoneOffset = pMesh->mBones[i]->mOffsetMatrix;
 				boneTransforms[BoneIndex] = AiToGLMMat4(BoneOffset);
-				//check if vertex is affected by bone weights
-				//for (unsigned int j = 0; j < pMesh->mBones[i]->mNumWeights; j++) {
-				//	unsigned int VertexID = pMesh->mBones[i]->mWeights[j].mVertexId;
-				//	float Weight = pMesh->mBones[i]->mWeights[j].mWeight;
+				
 
-				//	//add boneID and Weight
-				//	meshes[i].vertices[VertexID].Weights[j] = Weight;
-				//	for (unsigned int k = 0; k < NUM_BONES_PER_VERTEX; k++)
-				//	{
-				//		if (meshes[i].vertices[VertexID].boneIDs[k] != NULL || BoneIndex == 0)
-				//		{
-				//			meshes[i].vertices[VertexID].boneIDs[k] = BoneIndex;
-				//			break;
-				//		}
-				//	}
-				//}
+				//check if vertex is affected by bone weights
+				for (unsigned int j = 0; j < pMesh->mBones[i]->mNumWeights; j++) {
+					
+					unsigned int VertexID = pMesh->mBones[i]->mWeights[j].mVertexId;
+					float Weight = pMesh->mBones[i]->mWeights[j].mWeight;
+
+					//cout << BoneName.c_str() << " " << BoneIndex << " " << Weight << endl;
+					//add boneID and Weight
+					
+					for (unsigned int k = NUM_BONES_PER_VERTEX; k < 0; k--)
+					{
+						
+						//check if weight is empty
+						if (meshes[i].vertices[VertexID].Weights[k] == 0.0)
+						{
+
+							meshes[i].vertices[VertexID].Weights[k] = Weight;
+							meshes[i].vertices[VertexID].boneIDs[k] = BoneIndex;
+
+							
+							break;
+						}
+						
+					}
+				}
+					
+
 			}
 		}
+
+
 
 		// Processes a node in a recursive fashion. Processes each individual mesh located at the node and repeats this process on its children nodes (if any).
 		void Model::processNode(aiNode* node, const aiScene* scene)
@@ -190,8 +212,8 @@ namespace sa3d {
 				vertices.push_back(vertex);
 
 
-
 			}
+				
 			// now wak through each of the mesh's faces (a face is a mesh its triangle) and retrieve the corresponding vertex indices.
 			for (unsigned int i = 0; i < mesh->mNumFaces; i++)
 			{

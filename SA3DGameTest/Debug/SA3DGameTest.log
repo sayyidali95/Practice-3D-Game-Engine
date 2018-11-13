@@ -1,7 +1,15 @@
-﻿  player.cpp
-d:\users\sayyid\3dprojects\include\assimp\defs.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
-d:\users\sayyid\3dprojects\include\assimp\matrix3x3.h : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
-d:\users\sayyid\3dprojects\include\assimp\matrix3x3.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
-d:\users\sayyid\3dprojects\include\assimp\matrix4x4.inl : warning C4819: The file contains a character that cannot be represented in the current code page (932). Save the file in Unicode format to prevent data loss
+﻿  model.cpp
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(154): warning C4018: '<': signed/unsigned mismatch
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(331): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(333): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(339): warning C4018: '<': signed/unsigned mismatch
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(410): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(430): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(451): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(501): warning C4018: '<': signed/unsigned mismatch
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(512): warning C4018: '<': signed/unsigned mismatch
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(471): warning C4715: 'sa3d::graphics::Model::FindScale': not all control paths return a value
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(484): warning C4715: 'sa3d::graphics::Model::FindPosition': not all control paths return a value
+d:\users\sayyid\3dprojects\sa3dgametest\sa3dgametest\src\model.cpp(497): warning C4715: 'sa3d::graphics::Model::FindRotation': not all control paths return a value
   SA3DGameTest.vcxproj -> D:\Users\Sayyid\3DProjects\SA3DGameTest\Debug\SA3DGameTest.exe
   SA3DGameTest.vcxproj -> D:\Users\Sayyid\3DProjects\SA3DGameTest\Debug\SA3DGameTest.pdb (Partial PDB)

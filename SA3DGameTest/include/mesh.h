@@ -39,7 +39,7 @@ namespace sa3d {
 			glm::vec3 Tangent;
 			glm::vec3 Bitangent;
 			unsigned int boneIDs[NUM_BONES_PER_VERTEX];
-			float Weights[NUM_BONES_PER_VERTEX];
+			float Weights[NUM_BONES_PER_VERTEX] = { 0,0,0,0 };
 			//unsigned int id[4];
 		};
 

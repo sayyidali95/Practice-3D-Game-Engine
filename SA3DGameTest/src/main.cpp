@@ -105,7 +105,7 @@ int main()
 		playerShader.setUniformMat4("model", model);
 		//camera.Position =  player->position - glm::vec3(0.0f, -1.2f, -4.0f);
 		doMovement(pWindow, player);
-		if (pWindow->m_Keys[GLFW_KEY_SPACE])
+		if (pWindow->m_Keys[GLFW_KEY_1])
 		{
 			new Projectile();
 		}

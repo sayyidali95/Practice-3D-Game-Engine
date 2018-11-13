@@ -5,7 +5,7 @@ namespace sa3d {
 
 	Player::Player()
 	{
-		this->obj = new graphics::Model("d:/Users/Sayyid/Documents/SA3DFemaleBodyAssets/Shiinav1/ShiinaV1.dae");
+		this->obj = new graphics::Model("d:/Users/Sayyid/Documents/SA3DFemaleBodyAssets/Shiinav1/ShiinaV1.fbx");
 	};
 
 	void Player::update() {
@@ -18,7 +18,7 @@ namespace sa3d {
 		if (window->m_Keys[GLFW_KEY_W])
 			object->transform = glm::translate(object->transform, glm::vec3(0.0f, 0.0f, -1.0f) * DELTA_TIME);
 		if (window->m_Keys[GLFW_KEY_S])
-			object->transform = glm::translate(object->transform, glm::vec3(0.0f, 0.0f, 1.0f) * DELTA_TIME);
+			object->transform = glm::translate(object->transform,  glm::vec3(0.0f, 0.0f, 1.0f) * DELTA_TIME);
 		if (window->m_Keys[GLFW_KEY_A])
 			object->transform = glm::translate(object->transform, glm::vec3(-1.0f, 0.0f, 0.0f) * DELTA_TIME);
 		if (window->m_Keys[GLFW_KEY_D])
